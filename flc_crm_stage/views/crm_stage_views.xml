@@ -1,0 +1,31 @@
+<odoo>
+    <record id="view_crm_stage_form_inherit" model="ir.ui.view">
+        <field name="name">crm.stage.form.inherit.allowed_groups</field>
+        <field name="model">crm.stage</field>
+        <field name="inherit_id" ref="crm.crm_stage_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='is_won']" position="after">
+                <field name="allowed_groups" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+
+<!--    <record id="crm_lead_view_form_inherit" model="ir.ui.view">-->
+<!--        <field name="name">crm.lead.form.view.inherit</field>-->
+<!--        <field name="model">crm.lead</field>-->
+<!--        <field name="inherit_id" ref="crm.crm_lead_view_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            &lt;!&ndash; Hide Chatter for CRM Agents &ndash;&gt;-->
+<!--            <xpath expr="//div[@class='oe_chatter']" position="attributes">-->
+<!--&lt;!&ndash;                <attribute name="invisible"> invisible="sign_terms_type == 'html'" [('user_id.groups_id', 'in',&ndash;&gt;-->
+<!--&lt;!&ndash;                    [ref('flc_crm_stage.group_crm_agent')])]}&ndash;&gt;-->
+<!--&lt;!&ndash;                </attribute>&ndash;&gt;-->
+<!--                <attribute name="invisible">invisible="sign_terms_type == 'html'" [('user_id.groups_id', 'in',-->
+<!--                    [ref('flc_crm_stage.group_crm_agent')])]}-->
+<!--                </attribute>-->
+
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+</odoo>

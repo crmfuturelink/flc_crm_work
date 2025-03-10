@@ -1,0 +1,38 @@
+<odoo>
+    <record id="crm_stage_service_selected" model="crm.stage">
+        <field name="name">Service Selected</field>
+        <field name="sequence">1</field>
+        <field name="allowed_groups" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+
+    <record id="crm_stage_application_details" model="crm.stage">
+        <field name="name">Application Details</field>
+        <field name="sequence">2</field>
+        <field name="allowed_groups" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+
+    <record id="crm_stage_document" model="crm.stage">
+        <field name="name">Document</field>
+        <field name="sequence">3</field>
+        <field name="allowed_groups" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+
+    <record id="crm_stage_application_manager" model="crm.stage">
+        <field name="name">Application Manager</field>
+        <field name="sequence">4</field>
+        <field name="allowed_groups" eval="[(4, ref('flc_crm_stage.group_crm_agent'))]"/>
+    </record>
+
+    <record id="crm_stage_won" model="crm.stage">
+        <field name="name">Won</field>
+        <field name="sequence">5</field>
+        <field name="is_won">True</field>
+        <field name="allowed_groups" eval="[(4, ref('flc_crm_stage.group_crm_agent'))]"/>
+    </record>
+
+    <record id="crm_stage_decision" model="crm.stage">
+        <field name="name">Decision</field>
+        <field name="sequence">6</field>
+        <field name="allowed_groups" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+</odoo>

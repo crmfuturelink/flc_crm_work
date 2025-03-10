@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+restrict_chatter_rule,Restrict Chatter,mail.model_mail_message,flc_crm_stage.group_crm_agent,0,0,0,0
+restrict_followers_rule,Restrict Followers,mail.model_mail_followers,flc_crm_stage.group_crm_agent,0,0,0,0
+

@@ -1,0 +1,27 @@
+<odoo>
+    <record id="group_crm_agent" model="res.groups">
+        <field name="name">CRM Agent</field>
+        <field name="category_id" ref="base.module_category_sales"/>
+    </record>
+
+    <!-- Record Rule: Agents can only see allowed stages -->
+    <record id="crm_stage_agent_rule" model="ir.rule">
+        <field name="name">CRM Stage Restriction for Agents</field>
+        <field name="model_id" ref="crm.model_crm_stage"/>
+        <field name="groups" eval="[(4, ref('flc_crm_stage.group_crm_agent'))]"/>
+        <field name="domain_force">[
+            '|', ('allowed_groups', '=', False),
+            ('allowed_groups', 'in', user.groups_id.ids)
+            ]
+        </field>
+    </record>
+
+    <!-- Record Rule: Admins can see all CRM stages -->
+    <record id="crm_stage_admin_rule" model="ir.rule">
+        <field name="name">CRM Stage Full Access for Admins</field>
+        <field name="model_id" ref="crm.model_crm_stage"/>
+        <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+        <field name="domain_force">[]</field>
+    </record>
+
+</odoo>
