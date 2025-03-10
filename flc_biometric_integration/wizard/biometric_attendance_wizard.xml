@@ -1,0 +1,21 @@
+<odoo>
+    <record id="view_biometric_attendance_wizard_form" model="ir.ui.view">
+        <field name="name">biometric.attendance.wizard.form</field>
+        <field name="model">biometric.attendance.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Fetch Biometric Logs">
+                <group>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="terminal_id"/>
+<!--                    <field name="employee_id"/>-->
+                </group>
+                <footer>
+                    <button name="fetch_attendance_logs" string="Fetch Logs" type="object" class="btn-primary"/>
+<!--                    <button name="action_download_report" string="Download Report" type="object" class="btn-primary"/>-->
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

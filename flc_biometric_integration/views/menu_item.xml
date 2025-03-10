@@ -1,0 +1,25 @@
+<odoo>
+
+    <!--# Main APP-->
+    <menuitem id="menu_biometric_root" name="Biometric System" sequence="10"/>
+
+    <!-- ##Terminal -->
+    <menuitem id="menu_biometric_terminal" name="Branches" parent="menu_biometric_root"
+              action="action_biometric_terminal"/>
+
+    <!--Attendance logs -->
+    <menuitem id="menu_biometric_attendance_log" name="Attendance Logs" parent="menu_biometric_root"
+              action="action_biometric_attendance_log"/>
+
+    <!-- Open Wizard-->
+<!--    <menuitem id="menu_biometric_attendance_wizard" name="Fetch Attendance" parent="menu_biometric_root"-->
+<!--              action="action_biometric_attendance_wizard"/>-->
+
+    <menuitem id="menu_hr_report" name="HR Reports" parent="menu_biometric_root"/>
+
+    <menuitem id="menu_monthly_status_report"
+              name="Monthly Status Report"
+              parent="menu_hr_report"
+              action="action_monthly_status_report_wizard"/>
+
+</odoo>

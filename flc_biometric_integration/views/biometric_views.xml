@@ -1,0 +1,195 @@
+<odoo>
+    <record id="view_biometric_terminal_form" model="ir.ui.view">
+        <field name="name">biometric.terminal.form</field>
+        <field name="model">biometric.terminal</field>
+        <field name="arch" type="xml">
+            <form string="Biometric Terminal">
+                <sheet>
+                    <group>
+                        <group string="Biometric Device">
+                            <field name="name"/>
+                             <field name="serial_number"/>
+                            <field name="username"/>
+                            <field name="password"/>
+                        </group>
+                        <group string="Contact Details">
+                            <field name="branch_contact"/>
+                            <field name="branch_phone"/>
+                            <field name="branch_email"/>
+                            <field name="branch"/>
+                        </group>
+                    </group>
+
+                    <button name="action_biometric_attendance_wizard" string="Fetch Logs" type="object"
+                            class="btn-primary"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_biometric_attendance_log_form" model="ir.ui.view">
+        <field name="name">biometric.attendance.log.form</field>
+        <field name="model">biometric.attendance.log</field>
+        <field name="arch" type="xml">
+            <form string="Biometric Logs">
+                <sheet>
+                    <div class="oe_title">
+                        <center>
+                            <h1>
+                                <field name="employee_name" readonly="1" class="oe_inline"/>
+                                <span class="mx-1">-</span>
+                                <field name="attendance_date" readonly="1" class="oe_inline"/>
+                            </h1>
+                        </center>
+                    </div>
+                    <group>
+                        <group string="Employee Information">
+                            <field name="user_id"/>
+                            <field name="employee_id"/>
+                            <field name="terminal_id"/>
+                            <field name="is_first_record" invisible="0"/>
+                            <field name="summary_record_id" invisible="1"/>
+                        </group>
+                        <group string="Log Details">
+                            <field name="log_time"/>
+                            <field name="attendance_type"/>
+                            <field name="attendance_date" readonly="1"/>
+                            <field name="is_first_record" invisible="0"/>
+                        </group>
+                    </group>
+
+                    <!-- Only show summary fields on the first record of the day -->
+                    <notebook>
+                        <page string="Daily Summary" name="daily_summary">
+                            <group>
+                                <group>
+                                    <field name="first_check_in" readonly="1"/>
+                                    <field name="last_check_out" readonly="1"/>
+                                    <field name="total_hours" readonly="1" widget="float_time"/>
+                                </group>
+                                <group>
+                                    <field name="all_logs" readonly="1" widget="text"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Search View -->
+    <record id="view_biometric_attendance_log_search" model="ir.ui.view">
+        <field name="name">biometric.attendance.log.search</field>
+        <field name="model">biometric.attendance.log</field>
+        <field name="arch" type="xml">
+            <search string="Search Biometric Logs">
+                <field name="user_id"/>
+                <field name="employee_id"/>
+                <field name="employee_name"/>
+                <field name="attendance_date"/>
+                <field name="terminal_id"/>
+                <separator/>
+                <filter string="Check-In" name="check_in" domain="[('attendance_type', '=', 'in')]"/>
+                <filter string="Check-Out" name="check_out" domain="[('attendance_type', '=', 'out')]"/>
+                <separator/>
+                <filter string="Daily Summaries Only" name="first_records" domain="[('is_first_record', '=', True)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Employee Code" name="group_by_user_id" context="{'group_by': 'user_id'}"/>
+                    <filter string="Employee" name="group_by_employee" context="{'group_by': 'employee_id'}"/>
+                    <filter string="Date" name="group_by_date" context="{'group_by': 'attendance_date'}"/>
+                    <filter string="Branch" name="group_by_terminal" context="{'group_by': 'terminal_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Calendar View -->
+    <record id="view_biometric_attendance_log_calendar" model="ir.ui.view">
+        <field name="name">biometric.attendance.log.calendar</field>
+        <field name="model">biometric.attendance.log</field>
+        <field name="arch" type="xml">
+            <calendar string="Attendance Calendar" date_start="log_time" color="employee_id">
+                <field name="employee_name"/>
+                <field name="attendance_type"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Graph View for Analytics -->
+    <record id="view_biometric_attendance_log_graph" model="ir.ui.view">
+        <field name="name">biometric.attendance.log.graph</field>
+        <field name="model">biometric.attendance.log</field>
+        <field name="arch" type="xml">
+            <graph string="Attendance Analysis" sample="1">
+                <field name="attendance_date" interval="day"/>
+                <field name="employee_id"/>
+                <field name="total_hours" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+<!--    &lt;!&ndash; Pivot View for Analytics &ndash;&gt;-->
+<!--    <record id="view_biometric_attendance_log_pivot" model="ir.ui.view">-->
+<!--        <field name="name">biometric.attendance.log.pivot</field>-->
+<!--        <field name="model">biometric.attendance.log</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <pivot string="Attendance Analysis" sample="1">-->
+<!--                <field name="attendance_date" interval="day" type="row"/>-->
+<!--                <field name="employee_id" type="row"/>-->
+<!--                <field name="total_hours" type="measure"/>-->
+<!--            </pivot>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <!-- Tree View -->
+    <record id="view_biometric_attendance_log_tree" model="ir.ui.view">
+        <field name="name">biometric.attendance.log.tree</field>
+        <field name="model">biometric.attendance.log</field>
+        <field name="arch" type="xml">
+            <tree string="Biometric Attendance Logs" decoration-info="is_first_record==True">
+                <field name="user_id"/>
+                <field name="employee_name"/>
+                <field name="attendance_date"/>
+                <field name="log_time"/>
+                <field name="attendance_type"/>
+                <field name="first_check_in" />
+                <field name="last_check_out" />
+                <field name="total_hours"/>
+                <field name="is_first_record" invisible="1"/>
+                <field name="summary_record_id" invisible="1"/>
+                 <button name="print_attendance_report" type="object" string="Print Report" class="btn-primary"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_biometric_terminal_tree" model="ir.ui.view">
+        <field name="name">view.biometric.terminal.tree</field>
+        <field name="model">biometric.terminal</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="serial_number"/>
+                <field name="branch_contact"/>
+                <field name="branch_phone"/>
+                <field name="branch_email"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="action_biometric_terminal" model="ir.actions.act_window">
+        <field name="name">Biometric Terminals</field>
+        <field name="res_model">biometric.terminal</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_biometric_attendance_log" model="ir.actions.act_window">
+        <field name="name">Biometric Attendance Logs</field>
+        <field name="res_model">biometric.attendance.log</field>
+        <field name="view_mode">tree,form,calendar,graph</field>
+    </record>
+
+</odoo>
