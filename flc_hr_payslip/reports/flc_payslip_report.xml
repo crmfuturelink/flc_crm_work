@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="fls_payslip_report" model="ir.actions.report">
+            <field name="name">FLC Payslip Report</field>
+            <field name="model">hr.payslip</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">flc_hr_payslip.flc_custom_template</field>
+            <field name="report_file">flc_hr_payslip.flc_custom_template</field>
+            <field name="binding_model_id" ref="om_hr_payroll.model_hr_payslip"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">'FLC Payslip'</field>
+        </record>
+    </data>
+</odoo>

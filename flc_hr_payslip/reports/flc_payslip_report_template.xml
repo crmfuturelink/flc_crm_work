@@ -1,0 +1,403 @@
+<odoo>
+   <template id="flc_custom_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="flc_hr_payslip.report_flc_hr_payslip"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="hr_payslip_custom_header">
+        <div class="header" style="border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 15px;">
+            <div class="row">
+                <div class="col-4">
+                    <t t-if="doc.employee_id.employee_category == 'consultant'">
+                        <img src="/flc_hr_payslip/static/src/FLC Logo-01.png" alt="Consultant Logo"
+                             class="img-fluid"/>
+                    </t>
+                    <t t-elif="doc.employee_id.employee_category == 'education'">
+                        <img src="/flc_hr_payslip/static/src/future-links-logo.png" alt="Education Logo"
+                             class="img-fluid"/>
+                    </t>
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-6 text-right">
+                    <t t-if="doc.employee_id.employee_category == 'consultant'">
+                        <h3 style="font-size: 18px; font-weight: bold; line-height: 1.4;">
+                            Future Link Consultants Pvt Ltd
+                        </h3>
+                        <p style="font-size: 16px; line-height: 1.4; margin: 0;">
+                            216, Atlantis Complex, Sarabhai Compound
+                            <br/>
+                            Near Genda Circle, Vadodara, Gujarat - 390023
+                        </p>
+                    </t>
+                    <t t-elif="doc.employee_id.employee_category == 'education'">
+                        <h3 style="font-size: 18px; font-weight: bold; line-height: 1.4;">
+                            Future Link Academic Excellence
+                        </h3>
+                        <p style="font-size: 16px; line-height: 1.4; margin: 0;">
+                            Education Hub Atlantis, Sarabhai Compound
+                            <br/>
+                            Near Knowledge Circle, Vadodara, Gujarat - 390023
+                        </p>
+                    </t>
+                </div>
+            </div>
+        </div>
+        <t t-out="0"/>
+
+        <div class="footer text-center" style="border-top: 1px solid #ddd; padding-top: 10px; margin-top: 15px;">
+            <div class="row">
+                <div class="col-4">
+                    <strong>Future Link Consultants Pvt Ltd</strong>
+                </div>
+                <div class="col-4">
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>
+                </div>
+                <div class="col-4">
+                    <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+
+        </div>
+    </template>
+
+    <template id="report_flc_hr_payslip" name="Custom Payslip Report">
+        <t t-call="flc_hr_payslip.hr_payslip_custom_header">
+            <div class="page" style="margin-top: -5px !important;">
+<!--                <div style="border: 3px solid black;">-->
+<!--                        <center>-->
+<!--                             <h4 >Payslip for the month of-->
+<!--                            <span t-field="doc.date_from" t-options='{"format": "MMMM yyyy"}'/>-->
+<!--                        </h4>-->
+<!--                        </center>-->
+<!--                    <table style="width: 100%;">-->
+<!--                        <tr>-->
+<!--                            &lt;!&ndash; First Column &ndash;&gt;-->
+<!--                            <td style="width: 50%; vertical-align: top; text-align: left;">-->
+<!--                                <h4>Employee Name : - -->
+<!--                                    <span style="color: #6c757d;" t-field="doc.employee_id.name"/>-->
+<!--                                </h4>-->
+<!--                                <h4>Company Code : - -->
+<!--                                    <span style="color: #6c757d;" t-field="doc.employee_id.identification_id"/>-->
+<!--                                </h4>-->
+<!--                                <h4>Designation : - -->
+<!--                                    <span style="color: #6c757d;" t-field="doc.employee_id.job_id.name"/>-->
+<!--                                </h4>-->
+<!--                                <h4>Account No : - -->
+<!--                                    <span style="color: #6c757d;" t-field="doc.employee_id.bank_account_id.acc_number"/>-->
+<!--                                </h4>-->
+<!--                                <h4>Date of Joining : - -->
+<!--                                    <span style="color: #6c757d;" t-field="doc.employee_id.employee_doj"/>-->
+<!--                                </h4>-->
+<!--                            </td>-->
+
+<!--                            &lt;!&ndash; Second Column (Left-Aligned) &ndash;&gt;-->
+<!--                            <td style="width: 50%; vertical-align: top; text-align: right;">-->
+<!--                                <h4 class="text-muted">Aadhar No : - -->
+<!--                                    <span style="color: #6c757d;" t-field="doc.employee_id.aadhar_no"/>-->
+<!--                                </h4>-->
+<!--                                <h4 class="text-muted">PF No : - -->
+<!--                                    <span style="color: #6c757d;" t-field="doc.employee_id.pf_no"/>-->
+<!--                                </h4>-->
+<!--                                <h4>UAN No : - -->
+<!--                                    <span style="color: #6c757d;" t-field="doc.employee_id.uan_no"/>-->
+<!--                                </h4>-->
+<!--                                <h4>ESIC No : - -->
+<!--                                    <span style="color: #6c757d;" t-field="doc.employee_id.eisc_no"/>-->
+<!--                                </h4>-->
+<!--                                <h4>Date of Birth : - -->
+<!--                                    <span style="color: #6c757d;" t-field="doc.employee_id.birthday"/>-->
+<!--                                </h4>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+
+<!--                </div>-->
+                <div style="border: 3px solid black; padding: 15px; font-family: Arial, sans-serif;">
+    <center>
+        <h2 style="margin-left: -80px;">Payslip for the Month of
+            <span t-field="doc.date_from" t-options='{"format": "MMMM yyyy"}'/>
+        </h2>
+    </center>
+
+<!--    <table style="width: 100%; border-collapse: collapse;">-->
+<!--        <tr>-->
+<!--            &lt;!&ndash; First Column &ndash;&gt;-->
+
+<!--            <td style="width: 50%; vertical-align: top; text-align: left; padding-left: 20px;">-->
+<!--                <p style="display: flex; justify-content: space-between; max-width: 300px;">-->
+<!--                    <strong>Employee Name:</strong>-->
+<!--                    <span style="color: #6c757d; margin-left: 10px;" t-field="doc.employee_id.name"/>-->
+<!--                </p>-->
+<!--                <p style="display: flex; justify-content: space-between; max-width: 300px;">-->
+<!--                    <strong>Company Code:</strong>-->
+<!--                    <span style="color: #6c757d; margin-left: 10px;" t-field="doc.employee_id.identification_id"/>-->
+<!--                </p>-->
+<!--                <p style="display: flex; justify-content: space-between; max-width: 300px;">-->
+<!--                    <strong>Designation:</strong>-->
+<!--                    <span style="color: #6c757d; margin-left: 10px;" t-field="doc.employee_id.job_id.name"/>-->
+<!--                </p>-->
+<!--                <p style="display: flex; justify-content: space-between; max-width: 300px;">-->
+<!--                    <strong>Account No:</strong>-->
+<!--                    <span style="color: #6c757d; margin-left: 10px;"-->
+<!--                          t-field="doc.employee_id.bank_account_id.acc_number"/>-->
+<!--                </p>-->
+<!--                <p style="display: flex; justify-content: space-between; max-width: 300px;">-->
+<!--                    <strong>Date of Joining:</strong>-->
+<!--                    <span style="color: #6c757d; margin-left: 10px;" t-field="doc.employee_id.employee_doj"/>-->
+<!--                </p>-->
+<!--            </td>-->
+
+
+<!--            &lt;!&ndash; Second Column &ndash;&gt;-->
+
+<!--            <td style="width: 50%; vertical-align: top; text-align: left; padding-right: 20px;">-->
+<!--                <p style="display: flex; justify-content: space-between; max-width: 300px;">-->
+<!--                    <strong>Aadhar No:</strong>-->
+<!--                    <span style="color: #6c757d; margin-left: 10px;" t-field="doc.employee_id.aadhar_no"/>-->
+<!--                </p>-->
+<!--                <p style="display: flex; justify-content: space-between; max-width: 300px;">-->
+<!--                    <strong>PF No:</strong>-->
+<!--                    <span style="color: #6c757d; margin-left: 10px;" t-field="doc.employee_id.pf_no"/>-->
+<!--                </p>-->
+<!--                <p style="display: flex; justify-content: space-between; max-width: 300px;">-->
+<!--                    <strong>UAN No:</strong>-->
+<!--                    <span style="color: #6c757d; margin-left: 10px;" t-field="doc.employee_id.uan_no"/>-->
+<!--                </p>-->
+<!--                <p style="display: flex; justify-content: space-between; max-width: 300px;">-->
+<!--                    <strong>ESIC No:</strong>-->
+<!--                    <span style="color: #6c757d; margin-left: 10px;" t-field="doc.employee_id.eisc_no"/>-->
+<!--                </p>-->
+<!--                <p style="display: flex; justify-content: space-between; max-width: 300px;">-->
+<!--                    <strong>Date of Birth:</strong>-->
+<!--                    <span style="color: #6c757d; margin-left: 10px;" t-field="doc.employee_id.birthday"/>-->
+<!--                </p>-->
+<!--            </td>-->
+
+<!--        </tr>-->
+<!--    </table>-->
+                    <table style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <!-- Column 1: Labels -->
+        <td style="width: 25%; text-align: left; margin-left: 10px; padding: 3px;">
+            <p><strong>Employee Name:</strong></p>
+            <p><strong>Company Code:</strong></p>
+            <p><strong>Designation:</strong></p>
+            <p><strong>Account No:</strong></p>
+            <p><strong>Date of Joining:</strong></p>
+        </td>
+        <!-- Column 2: Values -->
+        <td style="width: 25%; text-align: left; color: #6c757d; padding: 3px;">
+            <p t-field="doc.employee_id.name"> </p>
+            <p t-field="doc.employee_id.identification_id"> </p>
+            <p t-field="doc.employee_id.job_id.name"> </p>
+            <p t-field="doc.employee_id.bank_account_id.acc_number"> </p>
+            <p t-field="doc.employee_id.employee_doj"> </p>
+        </td>
+
+        <!-- Column 3: Labels -->
+        <td style="width: 25%; text-align: left; padding: 3px;">
+            <p><strong>Aadhar No:</strong></p>
+            <p><strong>PF No:</strong></p>
+            <p><strong>UAN No:</strong></p>
+            <p><strong>ESIC No:</strong></p>
+            <p><strong>Date of Birth:</strong></p>
+        </td>
+        <!-- Column 4: Values -->
+        <td style="width: 25%; text-align: left; color: #6c757d; padding: 3px;">
+            <p t-field="doc.employee_id.aadhar_no"> </p>
+            <p t-field="doc.employee_id.pf_no"> </p>
+            <p t-field="doc.employee_id.uan_no"> </p>
+            <p t-field="doc.employee_id.eisc_no"> </p>
+            <p t-field="doc.employee_id.birthday"> </p>
+        </td>
+    </tr>
+</table>
+
+</div>
+
+                <br/>
+                <div class="salary-details">
+                    <table class="table table-bordered" style=" height: auto; width: 100%; border-collapse: collapse;" border="1">
+                        <thead>
+                            <tr style="background-color: #f9f9f9; text-align: center; height: 38px; border: 1px solid black;">
+                                <th colspan="2" rowspan="2" style="width: 23%;">Payable Days</th>
+                                <th colspan="3" style="width: 40%;">Wages Earned</th>
+                                <th colspan="2" style="width: 37%;">Deductions</th>
+                            </tr>
+                            <tr style="background-color: #f1f1f1; text-align: center; border: 1px solid black; height: 30px;">
+                                <th style="width: 20%;">Head</th>
+                                <th style="width: 12%;">Rate</th>
+                                <th style="width: 12%;">Payable</th>
+                                <th style="width: 17%;">Amount</th>
+                                <th style="width: 12%;">Total</th>
+                            </tr>
+                        </thead>
+
+                        <tbody style="min-height: 200px;">
+                            <tr style="border: none;">
+                                <td class="text-start" style="border: none;">Present Days</td>
+                                <td style="text-align: center; border: none;">
+                                    <span t-field="doc.worked_days_line_ids.number_of_days"/>
+                                </td>
+                                <td style="text-align: left;" >Basic + DA</td>
+                                <td style="text-align: center;">
+                                    <span t-field="doc.employee_da"/>
+                                </td>
+                                <td style="text-align: center;">
+                                    <span t-field="doc.employee_da"/>
+                                </td>
+                                <td style="text-align: center;">Provident Fund (12%)</td>
+                                <td style="text-align: center;">
+                                    <span t-field="doc.employee_id.provident_fund"/>
+                                </td>
+                            </tr>
+                            <tr style="border: none; height: 30px;">
+                                <td class="text-start" style="border: none;">P.H.</td>
+                                <td style="text-align: center; center; border: none;">0</td>
+                                <td>House Rent Allowance</td>
+                                <td style="text-align: center;">
+                                    <span t-field="doc.employee_hra"/>
+                                </td>
+                                <td style="text-align: center;">
+                                    <span t-field="doc.employee_hra"/>
+                                </td>
+                                <td style="text-align: center;">ESIC (0.75%)</td>
+                                <td style="text-align: center;">
+                                    <span t-field="doc.employee_id.employee_esic"/>
+                                </td>
+                            </tr>
+                            <tr style="border: none;  height: 30px;">
+                                <td class="text-start" style="border: none;">PL</td>
+                                <td style="text-align: center; border: none;">-</td>
+                                <td>Conveyance Allowance</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;">Professional Tax</td>
+                                <td style="text-align: center;">
+                                    <span t-field="doc.employee_id.professional_tax"/>
+                                </td>
+                            </tr>
+                            <tr style="border: none;  height: 30px;">
+                                <td class="text-start" style="border: none;">OT Hrs.</td>
+                                <td style="text-align: center; border: none;">0</td>
+                                <td>Washing Allowance</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">GL WF</td>
+                                <td style="text-align: center;">0</td>
+                            </tr>
+                            <tr style="border: none;  height: 30px;">
+                                <td class="text-start" style="border: none;">W/OFF</td>
+                                <td style="text-align: center; border: none;">-</td>
+                                <td>Advance Bonus @8.33%</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;" >Advance</td>
+                                <td style="text-align: center;">0</td>
+                            </tr>
+                            <tr style="border: none;  height: 30px;">
+                                <td style="text-align: center; border: none;"  > </td>
+                                <td style="text-align: center; border: none;"> </td>
+                                <td>Other Allowance</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;">Canteen</td>
+                                <td style="text-align: center;">0</td>
+                            </tr>
+                            <tr style="border: none;  height: 30px;">
+                                <td style="text-align: center; border: none;"> </td>
+                                <td style="text-align: center; border: none;"> </td>
+                                <td>P H wages</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">Other / Loan</td>
+                                <td style="text-align: center;">0</td>
+                            </tr>
+                            <tr style="border: none;  height: 30px;">
+                                <td style="text-align: center; border: none;"> </td>
+                                <td style="text-align: center; border: none;"> </td>
+                                <td>Advance Bonus</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">Fine</td>
+                                <td style="text-align: center;">0</td>
+                            </tr>
+                            <tr style="border: none;  height: 30px;">
+                                <td style="text-align: center; border: none;"> </td>
+                                <td style="text-align: center; border: none;"> </td>
+                                <td>Leave Payment</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">Loss Or Damages</td>
+                                <td style="text-align: center;">0</td>
+                            </tr>
+                            <tr style="border: none;  height: 30px;">
+                                <td style="text-align: center; border: none;"> </td>
+                                <td style="text-align: center; border: none;"> </td>
+                                <td>Par. Incentive</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;">0</td>
+                                <td> </td>
+                                <td style="text-align: center;"> </td>
+                            </tr>
+                            <tr style="border: none;  height: 30px;">
+                                <td style="text-align: center; border: none;"> </td>
+                                <td style="text-align: center; border: none;"> </td>
+                                <td>Food Allowance</td>
+                                <td style="text-align: center;">-</td>
+                                <td style="text-align: center;">0</td>
+                                <td> </td>
+                                <td class="text-right"> </td>
+                            </tr>
+                            <tr style="background-color: #f9f9f9; font-weight: bold; height: 60px;">
+                                <td style="border: none;">Payable days<br/> Including Holidays</td>
+                                <td style="text-align: center; border: none;">25</td>
+                                <td colspan="2">Gross Earned Wages</td>
+                                <td style="text-align: center;">
+                                    <!-- Calculate sum directly in QWeb -->
+                                    <t t-set="total_wages" t-value="doc.employee_hra + doc.employee_da"/>
+                                    <span t-esc="total_wages"/>
+                                </td>
+                                <td>Total Deductions</td>
+                                <td style="text-align: center;">
+                                    <!-- Calculate total deductions if needed -->
+                                    <t t-set="total_deductions"
+                                       t-value="doc.employee_id.provident_fund + doc.employee_id.employee_esic + doc.employee_id.professional_tax"/>
+                                    <span t-esc="total_deductions"/>
+                                </td>
+                            </tr>
+                            <tr style="height: 30px;">
+                                <td colspan="2"> </td>
+                                <td style="font-weight: bold;">NET PAYABLE</td>
+                                <td style="font-weight: bold; text-align: center;" colspan="4">
+                                    <!-- Calculate Net Payable dynamically -->
+                                    <t t-set="net_payable" t-value="total_wages - total_deductions"/>
+                                    <span t-esc="net_payable"/>
+                                </td>
+                            </tr>
+                            <tr style="font-size: 18px; height: 60px;">
+                                <td colspan="5">
+                                    <p>
+                                        <strong>Amount in Words:</strong>
+                                         <t t-esc="doc.company_id.currency_id.amount_to_text(net_payable)"/>
+
+                                    </p>
+                                </td>
+                                <td colspan="2"><strong>For Future Link Consultants Pvt. Ltd</strong></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="text-align: center;">
+                    This is a computer-generated slip and does not require a signature.
+                </p>
+            </div>
+        </t>
+    </template>
+</odoo>
