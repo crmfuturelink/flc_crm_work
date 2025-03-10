@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+flc_study_plan.access_flc_student,access_flc_student,flc_study_plan.model_flc_student,base.group_user,1,1,1,1
+flc_study_plan.access_flc_student_education,access_flc_student_education,flc_study_plan.model_flc_student_education,base.group_user,1,1,1,1
