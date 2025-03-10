@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+###############################################################################
+#
+#    Future Link Pvt. Ltd.
+#
+#    Copyright (C) 2025-TODAY Future Link Pvt. Ltd. (<https://futurelinkconsultants.com>)
+#    Author: Ranjan  (crmdeveloper@futurelinkconsultants.com)
+#
+#
+###############################################################################
+
 from odoo import models, fields, api
 import requests
 from lxml import etree
@@ -191,73 +202,3 @@ class BiometricAttendanceLogLine(models.Model):
     attendance_log_id = fields.Many2one('biometric.attendance.log', string="Attendance Log")
     attendance_date = fields.Date(string="Date")
     status = fields.Selection([('P', 'Present'), ('A', 'Absent'), ('L', 'Leave')], default='A')
-
-# class BiometricAttendanceLog(models.Model):
-#     _name = 'biometric.attendance.log'
-#     _description = 'Biometric Attendance Log'
-#     _order = 'attendance_date desc, employee_id'
-#
-#
-#     # employee_name = fields.Char("Employee Name")  # Store employee name initially as Char
-#     employee_name = fields.Char("Employee Name", compute="_compute_employee_name")
-#     attendance_date = fields.Date("Attendance Date", compute="_compute_attendance_date")
-#
-#
-#     log_time = fields.Datetime("Log Time")
-#     terminal_id = fields.Many2one('biometric.terminal', "Terminal")
-#     attendance_type = fields.Selection([('in', 'Check-In'), ('out', 'Check-Out')], "Type")
-#     employee_id = fields.Many2one('hr.employee', string="Employee")
-#
-#     first_check_in = fields.Datetime("First Check-In", compute="_compute_attendance_summary", store=True)
-#     last_check_out = fields.Datetime("Last Check-Out", compute="_compute_attendance_summary", store=True)
-#     all_logs = fields.Text("Log Details", compute="_compute_attendance_summary")
-#
-#     @api.depends('log_time')
-#     def _compute_attendance_date(self):
-#         for record in self:
-#             record.attendance_date = record.log_time.date()
-#
-#     @api.depends('employee_id')
-#     def _compute_employee_name(self):
-#         for record in self:
-#             record.employee_name = record.employee_id.name if record.employee_id else "Unknown"
-#
-#     @api.depends('employee_id', 'attendance_date', 'log_time', 'attendance_type')
-#     def _compute_attendance_summary(self):
-#         for record in self:
-#             if not record.employee_id or not record.attendance_date:
-#                 record.first_check_in = False
-#                 record.last_check_out = False
-#                 record.all_logs = ""
-#                 continue
-#
-#             # Fetch logs only for the same employee on the same date
-#             logs = self.env['biometric.attendance.log'].search([
-#                 ('employee_id', '=', record.employee_id.id),
-#                 ('attendance_date', '=', record.attendance_date)
-#             ], order="log_time asc")
-#
-#             check_ins = logs.filtered(lambda r: r.attendance_type == 'in')
-#             check_outs = logs.filtered(lambda r: r.attendance_type == 'out')
-#
-#             # First Check-In and Last Check-Out for the day
-#             first_in = check_ins[0].log_time if check_ins else False
-#             last_out = check_outs[-1].log_time if check_outs else False
-#
-#             # Assign values **only to one record per day** (first log entry for that day)
-#             if logs and record == logs[0]:
-#                 record.first_check_in = first_in
-#                 record.last_check_out = last_out
-#             else:
-#                 record.first_check_in = False
-#                 record.last_check_out = False
-#
-#             # Format all logs for that day (grouped properly)
-#             log_entries = []
-#             for log in logs:
-#                 log_entries.append(f"{log.log_time.strftime('%H:%M:%S')} - {log.attendance_type.upper()}")
-#
-#             record.all_logs = "\n".join(log_entries)
-
-
-

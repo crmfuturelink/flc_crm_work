@@ -131,19 +131,6 @@
         </field>
     </record>
 
-<!--    &lt;!&ndash; Pivot View for Analytics &ndash;&gt;-->
-<!--    <record id="view_biometric_attendance_log_pivot" model="ir.ui.view">-->
-<!--        <field name="name">biometric.attendance.log.pivot</field>-->
-<!--        <field name="model">biometric.attendance.log</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <pivot string="Attendance Analysis" sample="1">-->
-<!--                <field name="attendance_date" interval="day" type="row"/>-->
-<!--                <field name="employee_id" type="row"/>-->
-<!--                <field name="total_hours" type="measure"/>-->
-<!--            </pivot>-->
-<!--        </field>-->
-<!--    </record>-->
-
     <!-- Tree View -->
     <record id="view_biometric_attendance_log_tree" model="ir.ui.view">
         <field name="name">biometric.attendance.log.tree</field>

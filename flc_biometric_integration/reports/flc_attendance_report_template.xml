@@ -57,111 +57,66 @@
     </template>
 
     <!-- Report Template -->
-<!--    <template id="biometric_attendance_report_template">-->
-<!--        <t t-call="flc_biometric_integration.flc_biometric_custom_header">-->
-<!--            <style>-->
-<!--                .center-text {-->
-<!--                    text-align: center;-->
-<!--                }-->
-<!--                .table-container {-->
-<!--                    page-break-inside: avoid; /* Prevent table split across pages */-->
-<!--                    margin-bottom: 20px;-->
-<!--                }-->
-<!--            </style>-->
+    <template id="biometric_attendance_report_template">
+        <t t-call="flc_biometric_integration.flc_biometric_custom_header">
+            <style>
+                .center-text {
+                    text-align: center;
+                }
+                .table-container {
+                    page-break-inside: avoid; /* Prevent table split across pages */
+                    margin-bottom: 20px;
+                }
+            </style>
 
-<!--&lt;!&ndash;            <h1>Biometric Attendance Report</h1>&ndash;&gt;-->
-<!--            <div class="table-container">-->
-<!--                <table class="table" style=" height: auto; width: 100%;" >-->
-<!--                    <tr>-->
-<!--                        <td>-->
-<!--                            <strong>Employee:</strong>-->
-<!--                            <t t-esc="doc.employee_name"/>-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <strong>Date:</strong>-->
-<!--                            <t t-esc="doc.attendance_date"/>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td>-->
-<!--                            <strong>Branch:</strong>-->
-<!--                            <t t-esc="doc.terminal_id.name if doc.terminal_id else 'All Branches'"/>-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                            <strong>Employee ID :</strong>-->
-<!--                            <t t-esc="doc.user_id"/>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                </table>-->
-
-<!--                &lt;!&ndash;                <p><strong>Month:</strong> <t t-esc="doc.attendance_date.strftime('%B %Y') if doc.attendance_date else 'N/A'"/></p>&ndash;&gt;-->
-
-<!--                <table class="table table-bordered" style=" height: auto; width: 100%; border-collapse: collapse;" border="1">-->
-<!--                    <thead>-->
-<!--                        <tr>-->
-<!--                            <th>Employee</th>-->
-<!--                            <th>Attendance Date</th>-->
-<!--                            <th>First Check-In</th>-->
-<!--                            <th>Last Check-Out</th>-->
-<!--                            <th>Total Hours</th>-->
-<!--                            <th>All Logs</th>-->
-<!--                        </tr>-->
-<!--                    </thead>-->
-<!--                    <tbody>-->
-<!--                        <tr>-->
-<!--                            <td><t t-esc="doc.employee_name"/></td>-->
-<!--                            <td><t t-esc="doc.attendance_date"/></td>-->
-<!--                            <td><t t-esc="doc.first_check_in or 'N/A'"/></td>-->
-<!--                            <td><t t-esc="doc.last_check_out or 'N/A'"/></td>-->
-<!--                            <td><t t-esc="doc.total_hours or 0.0"/></td>-->
-<!--                            <td><t t-esc="doc.all_logs"/></td>-->
-<!--                        </tr>-->
-<!--                    </tbody>-->
-<!--                </table>-->
-<!--            </div>-->
-<!--        </t>-->
-<!--    </template>-->
-
-   <template id="biometric_attendance_report_template">
-    <t t-call="flc_biometric_integration.flc_biometric_custom_header">
-        <div class="page">
-            <h2 class="center-text">Monthly Biometric Attendance Report</h2>
-
-            <!-- Table Structure -->
-            <table class="table table-bordered" style="width: 100%; border-collapse: collapse;" border="1">
-                <thead>
+            <div class="table-container">
+                <table class="table" style=" height: auto; width: 100%;" >
                     <tr>
-                        <th>Employee</th>
-                        <t t-foreach="range(from_date.day, to_date.day + 1)" t-as="day">
-                            <th><t t-esc="day"/></th>
-                        </t>
+                        <td>
+                            <strong>Employee:</strong>
+                            <t t-esc="doc.employee_name"/>
+                        </td>
+                        <td>
+                            <strong>Date:</strong>
+                            <t t-esc="doc.attendance_date"/>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    <t t-foreach="docs" t-as="doc">
+                    <tr>
+                        <td>
+                            <strong>Branch:</strong>
+                            <t t-esc="doc.terminal_id.name if doc.terminal_id else 'All Branches'"/>
+                        </td>
+                        <td>
+                            <strong>Employee ID :</strong>
+                            <t t-esc="doc.user_id"/>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="table table-bordered" style=" height: auto; width: 100%; border-collapse: collapse;" border="1">
+                    <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th>Attendance Date</th>
+                            <th>First Check-In</th>
+                            <th>Last Check-Out</th>
+                            <th>Total Hours</th>
+                            <th>All Logs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         <tr>
                             <td><t t-esc="doc.employee_name"/></td>
-                            <t t-foreach="range(from_date.day, to_date.day + 1)" t-as="day">
-                                <td>
-                                    <t t-set="attendance" t-value="doc.get_attendance_for_day(day)"/>
-                                    <t t-if="attendance == 'P'">
-                                        <span style="color: green;">✔</span>
-                                    </t>
-                                    <t t-elif="attendance == 'A'">
-                                        <span style="color: red;">✘</span>
-                                    </t>
-                                    <t t-elif="attendance == 'L'">
-                                        <span style="color: orange;">L</span>
-                                    </t>
-                                    <t t-else="">-</t>
-                                </td>
-                            </t>
+                            <td><t t-esc="doc.attendance_date"/></td>
+                            <td><t t-esc="doc.first_check_in or 'N/A'"/></td>
+                            <td><t t-esc="doc.last_check_out or 'N/A'"/></td>
+                            <td><t t-esc="doc.total_hours or 0.0"/></td>
+                            <td><t t-esc="doc.all_logs"/></td>
                         </tr>
-                    </t>
-                </tbody>
-            </table>
-        </div>
-    </t>
-</template>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
 
 </odoo>

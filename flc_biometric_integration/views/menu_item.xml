@@ -11,10 +11,8 @@
     <menuitem id="menu_biometric_attendance_log" name="Attendance Logs" parent="menu_biometric_root"
               action="action_biometric_attendance_log"/>
 
-    <!-- Open Wizard-->
-<!--    <menuitem id="menu_biometric_attendance_wizard" name="Fetch Attendance" parent="menu_biometric_root"-->
-<!--              action="action_biometric_attendance_wizard"/>-->
 
+    <!-- Report Men-->
     <menuitem id="menu_hr_report" name="HR Reports" parent="menu_biometric_root"/>
 
     <menuitem id="menu_monthly_status_report"
