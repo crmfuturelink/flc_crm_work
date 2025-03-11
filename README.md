@@ -13,3 +13,14 @@ This repository contains several interconnected modules that make up the FLC Int
 - V 3.0 -  Advanced search and filtering to filter employees , Employee Code by month, day, and check-in type.
 - V 4.0 -  Biometric Attendance Report
 - V 5.0 -  Register Formate Added
+
+### 5. FLC CRM Help
+"""Provides an easy-to-use interface for new users,<br/>
+guiding them through CRM and FAQs while serving as a <br/>
+training hub for better understanding."""
+### Sub Modules
+-📷 Screenshots (Camera icon)</br>
+-🎥 Videos (Video icon)</br>
+-❓ FAQs (Question mark icon)</br>
+
+

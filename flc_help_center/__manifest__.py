@@ -1,7 +1,7 @@
 # __manifest__.py
 
 {
-    'name': 'Help',
+    'name': 'FLC CRM Help',
     'version': '17.0',
     'category': 'Tools',
     'summary': 'Manage screenshots, videos, and FAQs.',
