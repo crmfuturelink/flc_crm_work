@@ -1,0 +1,18 @@
+<odoo>
+    <record id="view_help_center_pdf_wizard" model="ir.ui.view">
+        <field name="name">help.center.pdf.wizard.form</field>
+        <field name="model">help.center.pdf.wizard</field>
+        <field name="arch" type="xml">
+            <form string="PDF Preview">
+                <field name="pdf_filename" invisible="1"/>
+                <field name="pdf_binary" widget="pdf_viewer" filename="pdf_filename" options="{'accepted_file_extensions': '.pdf'}"/>
+
+<!--                <field name="pdf_binary" widget="pdf_viewer" filename="pdf_filename"/>-->
+                <footer>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

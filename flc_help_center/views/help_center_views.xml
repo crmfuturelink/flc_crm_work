@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+     <record id="view_help_center_app_tree" model="ir.ui.view">
+        <field name="name">help.center.app.tree</field>
+        <field name="model">help.center.app</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+   <record id="view_help_center_app_form" model="ir.ui.view">
+    <field name="name">help.center.app.form</field>
+    <field name="model">help.center.app</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <group>
+                        <field name="document"/>
+                        <field name="document_filename"/>
+                        <field name="name" invisible="1"/>
+                        <field name="description" invisible="1"/>
+                        <field name="type" invisible="1"/>
+                        <field name="is_screenshoot" invisible="1"/>
+                        <field name="is_video" invisible="1"/>
+                        <field name="is_faq" invisible="1"/>
+                    </group>
+                    <group>
+                        <field name="image" invisible="1"/>
+                        <field name="video_url" invisible="1"/>
+                        <field name="answer" invisible="1"/>
+                    </group>
+                </group>
+
+                <!-- Background Section with Buttons -->
+                <div style="background: url('/flc_help_center/static/src/home.png') no-repeat center center;
+                            background-size: cover; width: 100%; height: 700px;
+                            display: flex; justify-content: center; align-items: center; gap: 60px;">
+                    <button name="open_time_off" type="object" string="Preview PDF" class="oe_highlight"/>
+
+
+                    <!-- Button 1: Time Off -->
+                    <button name="open_time_off" type="object" class="oe_stat_button"
+                            style="background-color: red; color: white; border: none; width: 200px; height: 150px;
+                                   border-radius: 50%; font-size: 32px; display: flex; align-items: center;
+                                   justify-content: center;">
+                        <i class="fa fa-calendar"> </i>
+                    </button>
+
+                    <!-- Button 2: Employee -->
+                    <button name="open_employee" type="object" class="oe_stat_button"
+                            style="background-color: blue; color: white; border: none; width: 100px; height: 100px;
+                                   border-radius: 50%; font-size: 32px; display: flex; align-items: center;
+                                   justify-content: center;">
+                        <i class="fa fa-user"> </i>
+                    </button>
+
+                    <!-- Button 3: Attendance -->
+                    <button name="open_attendance" type="object" class="oe_stat_button"
+                            style="background-color: green; color: white; border: none; width: 100px; height: 100px;
+                                   border-radius: 50%; font-size: 32px; display: flex; align-items: center;
+                                   justify-content: center;">
+                        <i class="fa fa-clock-o"> </i>
+                    </button>
+                </div>
+
+            </sheet>
+        </form>
+    </field>
+</record>
+
+
+
+<!--    <record id="view_help_center_app_form" model="ir.ui.view">-->
+<!--        <field name="name">help.center.app.form</field>-->
+<!--        <field name="model">help.center.app</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form>-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="name" invisible="1"/>-->
+<!--                            <field name="description" invisible="1"/>-->
+<!--                            <field name="type" invisible="1"/>-->
+<!--                            <field name="is_screenshoot" invisible="1"/>-->
+<!--                            <field name="is_video" invisible="1"/>-->
+<!--                            <field name="is_faq" invisible="1"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="image" invisible="1"/>-->
+<!--                            <field name="video_url" invisible="1"/>-->
+<!--                            <field name="answer" invisible="1"/>-->
+<!--                        </group>-->
+
+<!--                    </group>-->
+
+<!--&lt;!&ndash;                    <group>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <field name="image" widget="image" class="oe_picture"&ndash;&gt;-->
+<!--&lt;!&ndash;                               style="max-width: 100%; height: auto;"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </group>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <group>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <button name="open_time_off" type="object" string="Time off" icon="fa-check"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <button name="open_employee" type="object" string="Employee" icon="fa-edit"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <button name="open_attendance" type="object" string="Attendance" icon="fa-folder-open"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </group>&ndash;&gt;-->
+
+<!--                    <div style="background: url('/flc_help_center/static/src/home.png') no-repeat center center;-->
+<!--                            width: 1200px; height: 700px;">-->
+<!--                        <button name="open_time_off" type="object" class="oe_stat_button"-->
+<!--                                style="background-color: red; color: white; border: none;-->
+<!--               width: 70px; height: 70px; border-radius: 50%; font-size: 24px;">-->
+<!--                            <i class="fa fa-calendar"> </i>-->
+<!--                        </button>-->
+
+<!--                        <button name="open_employee" type="object" icon="fa-user" class="oe_stat_button"-->
+<!--                                style="width: 70px; height: 70px; border-radius: 50%; font-size: 24px;"/>-->
+
+<!--                        <button name="open_attendance" type="object" icon="fa-clock-o" class="oe_stat_button"-->
+<!--                                style="width: 70px; height: 70px; border-radius: 50%; font-size: 24px;"/>-->
+<!--                    </div>-->
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+   <record id="view_help_center_app_kanban" model="ir.ui.view">
+    <field name="name">help.center.app.kanban</field>
+    <field name="model">help.center.app</field>
+    <field name="arch" type="xml">
+        <kanban class="o_kanban_view o_kanban_grouped">
+            <field name="name"/>
+            <field name="image"/>
+            <field name="video_url"/>
+            <field name="type"/>
+            <templates>
+                <t t-name="kanban-box">
+                    <!-- Clickable Kanban Card -->
+                    <div t-attf-class="oe_kanban_card oe_kanban_global_click"
+                         t-att-style="'background-color: ' + (
+                              record.type.value == 'screenshot' and '#f0f8ff' or
+                              record.type.value == 'video' and '#e6ffe6' or
+                              record.type.value == 'faq' and '#fff4e6'
+                          ) + '; padding: 15px; border-radius: 12px; text-align: center; transition: 0.3s ease-in-out;'"
+                         onmouseover="this.style.transform='scale(1.05)';"
+                         onmouseout="this.style.transform='scale(1.0)';">
+
+                        <div class="oe_kanban_content" style="display: flex; flex-direction: column; align-items: center;">
+
+                            <!-- Dynamic Icon Selection -->
+                            <div style="margin-bottom: 10px;">
+                                <img t-if="record.type.value == 'screenshot'"
+                                     t-att-src="'/flc_help_center/static/src/img/sc.png'"
+                                     class="oe_kanban_image"
+                                     style="width: 80px; height: 80px; border-radius: 12px;"/>
+
+                                <img t-if="record.type.value == 'video'"
+                                     t-att-src="'/flc_help_center/static/src/img/video.png'"
+                                     class="oe_kanban_image"
+                                     style="width: 80px; height: 80px; border-radius: 12px;"/>
+
+                                <img t-if="record.type.value == 'faq'"
+                                     t-att-src="'/flc_help_center/static/src/img/faq.jpeg'"
+                                     class="oe_kanban_image"
+                                     style="width: 80px; height: 80px; border-radius: 12px;"/>
+                            </div>
+
+                            <!-- Name -->
+                            <div class="oe_kanban_details" style="margin-bottom: 10px;">
+                                <a type="edit" style="font-size: 16px; font-weight: bold; color: #333;">
+                                    <strong t-esc="record.name.value"/>
+                                </a>
+                            </div>
+
+                            <!-- Type Section (Color Coded) -->
+                            <div class="oe_kanban_badge" style="padding: 5px 10px; border-radius: 10px;">
+                                <span t-if="record.type.value == 'screenshot'" class="badge badge-info"
+                                      style="background-color: #007bff; color: white; padding: 5px 10px; border-radius: 5px;">
+                                    Screenshot
+                                </span>
+                                <span t-if="record.type.value == 'video'" class="badge badge-success"
+                                      style="background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">
+                                    Video
+                                </span>
+                                <span t-if="record.type.value == 'faq'" class="badge badge-warning"
+                                      style="background-color: #ff9800; color: white; padding: 5px 10px; border-radius: 5px;">
+                                    FAQ
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+
+    <record id="action_help_center_app" model="ir.actions.act_window">
+        <field name="name">Help Center App</field>
+        <field name="res_model">help.center.app</field>
+        <field name="view_mode">kanban,form</field>
+    </record>
+
+</odoo>

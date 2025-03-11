@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <menuitem id="menu_help_center"
+              name="Help"
+              web_icon="flc_study_plan,static/description/icon.png"
+              sequence="10"/>
+
+    <menuitem id="menu_help_center_app"
+              name="Help Center App"
+              parent="menu_help_center"
+              action="action_help_center_app"
+              sequence="10"/>
+</odoo>

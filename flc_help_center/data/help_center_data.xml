@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Screenshots Section -->
+        <record id="help_center_item_login" model="help.center.app">
+            <field name="name">Step By Step</field>
+            <field name="description">How to log into the app</field>
+            <field name="type">screenshot</field>
+            <field name="sequence">10</field>
+        </record>
+
+
+        <!-- Videos Section -->
+        <record id="help_center_item_getting_started" model="help.center.app">
+            <field name="name">Videos</field>
+            <field name="description">Learn the basics of the application</field>
+            <field name="type">video</field>
+            <field name="sequence">40</field>
+            <field name="video_url">https://example.com/video1.mp4</field>
+        </record>
+
+
+        <!-- FAQs Section -->
+        <record id="help_center_item_password" model="help.center.app">
+            <field name="name">FAQs</field>
+            <field name="type">faq</field>
+            <field name="sequence">60</field>
+            <field name="answer" type="html">
+                <p>To reset your password:</p>
+                <ol>
+                    <li>Click on the "Forgot Password" link on the login screen</li>
+                    <li>Enter your email address</li>
+                    <li>Check your email for reset instructions</li>
+                    <li>Follow the link in the email to create a new password</li>
+                </ol>
+            </field>
+        </record>
+
+    </data>
+</odoo>
