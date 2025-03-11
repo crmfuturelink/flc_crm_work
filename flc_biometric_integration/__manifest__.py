@@ -19,17 +19,20 @@
     """,
     'author': 'Ranjan / FLC',
     'category': 'Human Resources',
-    'depends': ['hr'],
+    'depends': ['base','hr'],
 
     'data': [
         'security/ir.model.access.csv',
         'data/cron_jobs.xml',
         'views/biometric_views.xml',
         'views/hr_employee_view.xml',
+        # 'views/company_view.xml',
         'wizard/biometric_attendance_wizard.xml',
         'wizard/monthly_status_report_view.xml',
+        'wizard/BiometricAttendanceRegisterReport_view.xml',
         'reports/flc_attendance_report.xml',
         'reports/flc_attendance_report_template.xml',
+        'reports/biometric_attendance_register_template_v1.xml',
         'views/menu_item.xml',
 
     ],

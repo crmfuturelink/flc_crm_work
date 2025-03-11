@@ -20,4 +20,12 @@
               parent="menu_hr_report"
               action="action_monthly_status_report_wizard"/>
 
+
+      <!-- Menu Item for Report wizard  FLC-->
+    <menuitem id="menu_biometric_attendance_register_report"
+              name="Daily Attendance Register"
+              parent="menu_hr_report"
+              action="action_biometric_attendance_register_wizard"
+              sequence="10"/>
+
 </odoo>

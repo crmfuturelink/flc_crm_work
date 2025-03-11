@@ -1,0 +1,198 @@
+<!-- Register-style Biometric Attendance Report Template -->
+<odoo>
+
+
+<template id="biometric_attendance_register_template_v1">
+   <t t-call="flc_biometric_integration.flc_biometric_custom_header">
+        <main>
+        <style>
+            .center-text {
+                text-align: center;
+            }
+            .table-container {
+                page-break-inside: avoid;
+                margin-bottom: 20px;
+            }
+            .late {
+                background-color: #ffe6e6; /* Light red */
+                color: #cc0000;
+            }
+            .early {
+                background-color: #e6ffe6; /* Light green */
+                color: #006600;
+            }
+            .on-time {
+                background-color: #e6f2ff; /* Light blue */
+                color: #0066cc;
+            }
+            .absent {
+                background-color: #fff2e6; /* Light orange */
+                color: #cc6600;
+            }
+            th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+                text-align: center;
+                vertical-align: middle;
+                padding: 6px;
+            }
+            td {
+                padding: 6px;
+                text-align: center;
+                vertical-align: middle;
+            }
+            .text-left {
+                text-align: left;
+            }
+            .report-header {
+                margin-bottom: 20px;
+            }
+        </style>
+
+        <div class="report-header">
+            <h2 class="center-text">Daily Biometric Attendance Register</h2>
+            <div class="row">
+                <div class="col-6">
+                    <p><strong>Date:</strong> <t t-esc="attendance_date"/></p>
+                    <p><strong>Branch:</strong> <t t-esc="branch or 'All Branches'"/></p>
+                </div>
+                <div class="col-6 text-right">
+                    <p><strong>Generated On:</strong> <t t-esc="datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')"/></p>
+                    <p><strong>Department:</strong> <t t-esc="department or 'All Departments'"/></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table class="table table-bordered" style="width: 100%; border-collapse: collapse;" border="1">
+                <thead>
+                    <tr>
+                        <th rowspan="2" style="width: 5%;">No.</th>
+                        <th rowspan="2" style="width: 20%;">Employee</th>
+                        <th rowspan="2" style="width: 10%;">Employee ID</th>
+                        <th colspan="2" style="width: 25%;">Morning</th>
+                        <th colspan="2" style="width: 25%;">Evening</th>
+                        <th rowspan="2" style="width: 10%;">Total Hours</th>
+                        <th rowspan="2" style="width: 5%;">Status</th>
+                    </tr>
+                    <tr>
+                        <th>Check-In</th>
+                        <th>Status</th>
+                        <th>Check-Out</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="employees" t-as="employee">
+                        <t t-set="attendance" t-value="attendance_data.get(employee.id, {})"/>
+
+                        <tr t-att-class="attendance.get('status', '')">
+                            <td>
+                                <t t-esc="loop.index"/>
+                            </td>
+                            <td class="text-left">
+                                <t t-esc="employee.name"/>
+                            </td>
+                            <td>
+                                <t t-esc="employee.biometric_id or ''"/>
+                            </td>
+
+                            <!-- Morning Check-In -->
+                            <td>
+                                <t t-if="attendance.get('first_check_in')">
+                                    <t t-esc="attendance['first_check_in']"/>
+                                </t>
+                                <t t-else="">--:--</t>
+                            </td>
+
+                            <!-- Evening Check-Out -->
+                            <td>
+                                <t t-if="attendance.get('last_check_out')">
+                                    <t t-esc="attendance['last_check_out']"/>
+                                </t>
+                                <t t-else="">--:--</t>
+                            </td>
+
+                            <!-- Total Hours -->
+                            <td>
+                                <t t-if="attendance.get('total_hours')">
+                                    <t t-esc="'{:.2f}'.format(attendance['total_hours'])"/>
+                                </t>
+                                <t t-else="">0.00</t>
+                            </td>
+
+                            <!-- Overall Status -->
+                            <td>
+                                <t t-if="attendance.get('status') == 'present'">
+                                    <span class="on-time">P</span>
+                                </t>
+                                <t t-elif="attendance.get('status') == 'absent'">
+                                    <span class="absent">A</span>
+                                </t>
+                            </td>
+                        </tr>
+                    </t>
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <h5>Attendance Summary</h5>
+                <table class="table table-bordered" style="width: 50%; border-collapse: collapse;" border="1">
+                    <tr>
+                        <th style="width: 60%">Total Employees</th>
+<!--                        <td style="width: 40%"><t t-esc="len(doc.employees)"/></td>-->
+                    </tr>
+                    <tr>
+                        <th>Present</th>
+<!--                        <td><t t-esc="get_attendance_count('present')"/></td>-->
+                    </tr>
+                    <tr>
+                        <th>Absent</th>
+<!--                        <td><t t-esc="get_attendance_count('absent')"/></td>-->
+                    </tr>
+                    <tr>
+                        <th>Late Arrivals</th>
+<!--                        <td><t t-esc="get_attendance_count('late')"/></td>-->
+                    </tr>
+                    <tr>
+                        <th>Early Departures</th>
+<!--                        <td><t t-esc="get_attendance_count('early_departure')"/></td>-->
+                    </tr>
+                    <tr>
+                        <th>Half Day</th>
+<!--                        <td><t t-esc="get_attendance_count('half_day')"/></td>-->
+                    </tr>
+                    <tr>
+                        <th>On Leave</th>
+<!--                        <td><t t-esc="get_attendance_count('leave')"/></td>-->
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Signature Section -->
+        <div class="row mt-5">
+            <div class="col-4 text-center">
+                <div style="border-top: 1px solid black; display: inline-block; width: 200px; margin-top: 50px;">
+                    Prepared By
+                </div>
+            </div>
+            <div class="col-4 text-center">
+                <div style="border-top: 1px solid black; display: inline-block; width: 200px; margin-top: 50px;">
+                    HR Manager
+                </div>
+            </div>
+            <div class="col-4 text-center">
+                <div style="border-top: 1px solid black; display: inline-block; width: 200px; margin-top: 50px;">
+                    Approved By
+                </div>
+            </div>
+        </div>
+        </main>
+    </t>
+   </template>
+</odoo>

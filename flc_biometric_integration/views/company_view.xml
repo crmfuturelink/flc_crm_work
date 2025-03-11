@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    &lt;!&ndash; Add fields to company form &ndash;&gt;-->
+<!--    <record id="view_company_form_inherit_biometric" model="ir.ui.view">-->
+<!--        <field name="name">res.company.form.inherit.biometric</field>-->
+<!--        <field name="model">res.company</field>-->
+<!--        <field name="inherit_id" ref="base.res_config_settings_view_form"/>-->
+<!--        <field name="arch" type="xml">-->
+
+<!--            <xpath expr="//block[@id='branding_settings']" position="before">-->
+<!--	    		<block title="Bio Metric Config" id="biometic_settings">-->
+<!--                    <setting string="Theme Colors" help="Customize the look and feel of the theme">-->
+<!--&lt;!&ndash;                <page string="Attendance Settings">&ndash;&gt;-->
+<!--                    <group>-->
+<!--                        <group string="Working Hours">-->
+<!--                            <field name="work_start_time" widget="float_time"/>-->
+<!--                            <field name="work_end_time" widget="float_time"/>-->
+<!--                            <field name="minimum_full_day_hours"/>-->
+<!--                        </group>-->
+<!--                        <group string="Attendance Tolerances">-->
+<!--                            <field name="late_tolerance_mins"/>-->
+<!--                            <field name="early_departure_tolerance_mins"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    </setting>-->
+<!--&lt;!&ndash;                </page>&ndash;&gt;-->
+<!--                </block>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="view_crm_settings_inherit" model="ir.ui.view">
+        <field name="name">crm.settings.inherit.biometric</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="crm.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+           <xpath expr="//form" position="inside">
+                <div id="biometric_crm_settings" class="settings">
+                    <h2>Biometric CRM</h2>
+                    <div class="app">
+                        <block title="CRM Biometric Integration">
+                            <setting help="Enable biometric authentication for CRM activities">
+                                <field name="work_start_time" widget="float_time"/>
+                            <field name="work_end_time" widget="float_time"/>
+                            <field name="minimum_full_day_hours"/>
+                            </setting>
+                            <setting help="Automatically log employee check-ins when they interact with CRM">
+                                 <field name="late_tolerance_mins"/>
+<!--                            <field name="early_departure_tolerance_mins"/>-->
+                            </setting>
+                        </block>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

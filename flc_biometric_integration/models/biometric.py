@@ -43,7 +43,8 @@ class BiometricAttendanceLog(models.Model):
     _rec_name = 'employee_name'
     _order = 'attendance_date desc, employee_id'
 
-    employee_name = fields.Char("Employee Name", compute="_compute_employee_name", store=True)
+    # employee_name = fields.Char("Employee Name", compute="_compute_employee_name", store=True)
+    employee_name = fields.Char("Employee Name", related="employee_id.name", store=True)
     attendance_date = fields.Date("Attendance Date", compute="_compute_attendance_date", store=True)
     user_id = fields.Char(string="Employee ID")
     log_time = fields.Datetime("Log Time")
@@ -62,6 +63,27 @@ class BiometricAttendanceLog(models.Model):
     summary_record_id = fields.Many2one('biometric.attendance.log', "Summary Record", compute="_compute_summary_record",
                                         store=True)
     attendance_logs = fields.One2many('biometric.attendance.log.line', 'attendance_log_id', string="Attendance Logs")
+
+    def get_employee_attendance(self, employee_id, attendance_date):
+        """Fetch attendance data for a specific employee and date."""
+        logs = self.search([
+            ('employee_id', '=', employee_id),
+            ('attendance_date', '=', attendance_date)
+        ], order="log_time asc")
+
+        first_check_in = logs.filtered(lambda l: l.attendance_type == 'in')[:1].log_time
+        last_check_out = logs.filtered(lambda l: l.attendance_type == 'out')[-1:].log_time
+
+        total_hours = 0.0
+        if first_check_in and last_check_out:
+            total_hours = (last_check_out - first_check_in).total_seconds() / 3600.0  # Convert to hours
+
+        return {
+            'first_check_in': first_check_in.strftime('%H:%M:%S') if first_check_in else '--:--',
+            'last_check_out': last_check_out.strftime('%H:%M:%S') if last_check_out else '--:--',
+            'total_hours': total_hours,
+            'status': 'present' if first_check_in and last_check_out else 'absent'
+        }
 
     def get_attendance_for_day(self, day):
         """Return attendance status for the given day"""
@@ -193,6 +215,32 @@ class BiometricAttendanceLog(models.Model):
             else:
                 result.append((record.id, "New Attendance Log"))
         return result
+
+class ReportBiometricAttendance(models.AbstractModel):
+    _name = 'report.flc_biometric_integration.attendance_register1'
+    _description = 'Biometric Attendance Report'
+
+    @api.model
+    def _get_report_values(self, docids, data=None):
+        docs = self.env['biometric.attendance.log'].browse(docids)
+
+        # Fetch all employees with biometric attendance data for the report
+        employees = self.env['hr.employee'].search([])
+
+        # Collect attendance data per employee
+        attendance_data = {}
+        attendance_date = fields.Date.context_today(self)
+        for emp in employees:
+            attendance_data[emp.id] = self.env['biometric.attendance.log'].get_employee_attendance(emp.id, attendance_date)
+
+        return {
+            'doc_ids': docids,
+            'doc_model': 'biometric.attendance.log',
+            'docs': docs,
+            'employees': employees,
+            'attendance_data': attendance_data,
+            'attendance_date': attendance_date
+        }
 
 
 class BiometricAttendanceLogLine(models.Model):

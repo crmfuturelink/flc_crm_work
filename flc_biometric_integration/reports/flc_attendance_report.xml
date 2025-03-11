@@ -27,4 +27,16 @@
         <field name="binding_type">report</field>
     </record>
 
+        <!-- Report Action -->
+    <record id="action_biometric_attendance_register_report_v1" model="ir.actions.report">
+        <field name="name">Daily Attendance Register V1</field>
+        <field name="model">biometric.attendance.log</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">flc_biometric_integration.biometric_attendance_register_template_v1</field>
+        <field name="report_file">flc_biometric_integration.biometric_attendance_register_template_v1</field>
+        <field name="paperformat_id" ref="flc_biometric_integration.paperformat_biometric_register"/>
+        <field name="binding_model_id" ref="model_biometric_attendance_log"/>
+        <field name="binding_type">report</field>
+    </record>
+
 </odoo>

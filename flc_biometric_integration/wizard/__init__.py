@@ -11,3 +11,4 @@
 
 from . import biometric_attendance_wizard
 from . import monthly_status_report
+from . import BiometricAttendanceRegisterReport
