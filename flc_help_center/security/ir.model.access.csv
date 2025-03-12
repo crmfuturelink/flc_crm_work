@@ -1,4 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-flc_help_center.access_help_center_app,access_help_center_app,flc_help_center.model_help_center_app,base.group_user,1,1,0,0
+flc_help_center.access_help_center_app,access_help_center_app,flc_help_center.model_help_center_app,base.group_user,1,1,1,1
 flc_help_center.access_help_center_pdf_wizard,access_help_center_pdf_wizard,flc_help_center.model_help_center_pdf_wizard,base.group_user,1,1,1,1
+flc_help_center.access_help_center_pdf,access_help_center_pdf,flc_help_center.model_help_center_pdf,base.group_user,1,1,1,1
+
 

@@ -19,8 +19,14 @@
             <sheet>
                 <group>
                     <group>
-                        <field name="document"/>
-                        <field name="document_filename"/>
+<!--                        <field name="document" widget="pdf_viewer"   invisible="[['is_screenshoot', '!=', True]]"/>-->
+<!--                        <field name="document_filename" invisible="1"/>-->
+<!--                        <field name="name" invisible="1"/>-->
+<!--                        <field name="description" invisible="1"/>-->
+<!--                        <field name="type" invisible="1"/>-->
+<!--                        <field name="is_screenshoot" invisible="0"/>-->
+                        <field name="document" widget="pdf_viewer" filename="document_filename" invisible="1"/>
+                        <field name="document_filename" invisible="1"/>
                         <field name="name" invisible="1"/>
                         <field name="description" invisible="1"/>
                         <field name="type" invisible="1"/>
@@ -152,8 +158,8 @@
 
                             <!-- Dynamic Icon Selection -->
                             <div style="margin-bottom: 10px;">
-                                <img t-if="record.type.value == 'screenshot'"
-                                     t-att-src="'/flc_help_center/static/src/img/sc.png'"
+<!--                                <img t-att-src="'/flc_help_center/static/src/img/sc.png'" style="width: 50px; height: 50px;"/>-->
+                                <img t-att-src="'/flc_help_center/static/src/img/sc.png'"
                                      class="oe_kanban_image"
                                      style="width: 80px; height: 80px; border-radius: 12px;"/>
 

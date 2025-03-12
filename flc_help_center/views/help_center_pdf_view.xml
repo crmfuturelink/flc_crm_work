@@ -1,0 +1,26 @@
+<odoo>
+    <record id="view_help_center_pdf_form" model="ir.ui.view">
+        <field name="name">help.center.pdf.form</field>
+        <field name="model">help.center.pdf</field>
+        <field name="arch" type="xml">
+            <form string="PDF Viewer">
+                <sheet>
+                    <group>
+                        <field name="pdf_binary" widget="pdf_viewer" filename="pdf_filename"/>
+                    </group>
+                    <footer>
+                        <button string="Close" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_help_center_pdf" model="ir.actions.act_window">
+        <field name="name">PDF Viewer</field>
+        <field name="res_model">help.center.pdf</field>
+        <field name="view_mode">form</field>
+<!--        <field name="view_id" ref="view_help_center_pdf_form"/>-->
+        <field name="target">new</field>
+    </record>
+</odoo>

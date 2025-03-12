@@ -11,6 +11,7 @@
         'security/ir.model.access.csv',
         'data/help_center_data.xml',
         'views/help_center_views.xml',
+        'views/help_center_pdf_view.xml',
         'wizard/help_center_pdf_wizard.xml',
         'views/menu_views.xml'
     ],
