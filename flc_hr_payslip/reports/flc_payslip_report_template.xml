@@ -8,9 +8,10 @@
     </template>
 
     <template id="hr_payslip_custom_header">
-<!--        style="border-bottom: 1px solid #ddd; margin-top: 20px; padding-bottom: 10px;"-->
         <div class="header">
             <div class="row">
+                <div class="col-1">
+                </div>
                 <div class="col-4">
                     <t t-if="doc.employee_id.employee_category == 'consultant'">
                         <img src="/flc_hr_payslip/static/src/FLC Logo-01.png" alt="Consultant Logo"
@@ -21,15 +22,19 @@
                              class="img-fluid"/>
                     </t>
                 </div>
-                <div class="col-2">
+                <div class="col-1">
                 </div>
+
                 <div class="col-6 text-right">
                     <t t-if="doc.employee_id.employee_category == 'consultant'">
                         <h3 style="font-size: 18px; font-weight: bold; line-height: 1.2; margin-bottom: 5px;">
                             Future Link Consultants Pvt Ltd
                         </h3>
-                        <p style="font-size: 14px; line-height: 1.2; margin: 0;">
-                            216, Atlantis Complex, Sarabhai Compound,<br/>
+                        <br/>
+                        <p style="font-size: 18px; font-weight: bold; line-height: 1; margin-bottom: 5px;">
+                            216, Atlantis Complex, Sarabhai Compound,
+                        </p>
+                        <p style="font-size: 18px; font-weight: bold; line-height: 1; margin-bottom: 5px;">
                             Near Genda Circle, Vadodara, Gujarat - 390023
                         </p>
                     </t>
@@ -47,21 +52,6 @@
         </div>
         <t t-out="0"/>
 
-<!--        <div class="footer text-center" style="border-top: 1px solid #ddd; padding-top: 10px; margin-top: 10px;">-->
-<!--            <div class="row">-->
-<!--                <div class="col-4">-->
-<!--                    <strong>Future Link Consultants Pvt Ltd</strong>-->
-<!--                </div>-->
-<!--                <div class="col-4">-->
-<!--                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>-->
-<!--                </div>-->
-<!--                <div class="col-4">-->
-<!--                    <span class="page"/>-->
-<!--                    /-->
-<!--                    <span class="topage"/>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
     </template>
 
 
@@ -70,7 +60,7 @@
             <div class="page" style="margin-top: -2px !important;">
                 <div style="border: 2px solid black; font-family: Arial, sans-serif;">
                     <center>
-                        <p style="margin: 0;">
+                        <p style="margin-bottom: 10px;">
                             <b>PaySlip for the Month of March</b>
 <!--                            <span t-field="doc.date_from" t-options='{"format": "MMMM yyyy"}'/>-->
                         </p>
@@ -79,64 +69,63 @@
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
                             <!-- Column 1: Labels -->
-                            <td style="width: 25%; text-align: left;">
-                                <p><strong>Employee Name:</strong></p>
-                                <p><strong>Company Code:</strong></p>
+                            <td style="width: 20%; text-align: left;">
+                                <p>Employee Name:</p>
+                                <p>Company Code:</p>
                                 <p>
-                                    <strong>Designation:</strong>
+                                    Designation:
                                 </p>
                                 <p>
-                                    <strong>Account No:</strong>
+                                    Account No:
                                 </p>
                                 <p>
-                                    <strong>Date of Joining:</strong>
+                                    Date of Joining:
                                 </p>
                             </td>
                             <!-- Column 2: Values -->
-                            <td style="width: 25%; text-align: left; color: #6c757d;">
-                                <p t-field="doc.employee_id.name"></p>
-                                <p t-field="doc.employee_id.identification_id"></p>
-                                <p t-field="doc.employee_id.job_id.name"></p>
-                                <p t-field="doc.employee_id.bank_account_id.acc_number"></p>
-                                <p t-field="doc.employee_id.employee_doj"></p>
+                            <td style="width: 30%; text-align: left; margin-left: -10px;">
+                                <p t-field="doc.employee_id.name"> </p>
+                                <p t-field="doc.employee_id.identification_id"> </p>
+                                <p t-field="doc.employee_id.job_id.name"> </p>
+                                <p t-field="doc.employee_id.bank_account_id.acc_number"> </p>
+                                <p t-field="doc.employee_id.employee_doj"> </p>
                             </td>
 
                             <!-- Column 3: Labels -->
-                            <td style="width: 25%; text-align: left;">
+                            <td style="width: 20%; text-align: left;">
                                 <p>
-                                    <strong>Aadhar No:</strong>
+                                    Aadhar No:
                                 </p>
                                 <p>
-                                    <strong>PF No:</strong>
+                                    PF No:
                                 </p>
                                 <p>
-                                    <strong>UAN No:</strong>
+                                    UAN No:
                                 </p>
                                 <p>
-                                    <strong>ESIC No:</strong>
+                                    ESIC No:
                                 </p>
                                 <p>
-                                    <strong>Date of Birth:</strong>
+                                    Date of Birth:
                                 </p>
                             </td>
                             <!-- Column 4: Values -->
-                            <td style="width: 25%; text-align: left; color: #6c757d;">
-                                <p t-field="doc.employee_id.aadhar_no"></p>
-                                <p t-field="doc.employee_id.pf_no"></p>
-                                <p t-field="doc.employee_id.uan_no"></p>
-                                <p t-field="doc.employee_id.eisc_no"></p>
-                                <p t-field="doc.employee_id.birthday"></p>
+                            <td style="width: 30%; text-align: left; margin-left: -10px;">
+                                <p t-field="doc.employee_id.aadhar_no"> </p>
+                                <p t-field="doc.employee_id.pf_no"> </p>
+                                <p t-field="doc.employee_id.uan_no"> </p>
+                                <p t-field="doc.employee_id.eisc_no"> </p>
+                                <p t-field="doc.employee_id.birthday"> </p>
                             </td>
                         </tr>
                     </table>
                 </div>
                 <br/>
                 <!--   Main Table Structure -->
-<!--style="height: 400px; width: 100%; border: 1px solid black;"-->
                 <div class="payroll_table" style="height: 400px; width: 100%;">
                     <table class="table" style="width: 100%; height: 700px; border-collapse: collapse;">
                         <tr>
-                            <th colspan="2" style="border: 1px solid black; padding: 5px;">Payable Days</th>
+                            <th colspan="2" rowspan="2" style="border: 1px solid black; padding: 5px;">Payable Days</th>
                             <th colspan="3" style="border: 1px solid black; padding: 5px; text-align: center;">Wages
                                 Earned
                             </th>
@@ -145,45 +134,44 @@
                             </th>
                         </tr>
                         <tr>
-                            <th style="border: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px;"> </th>
-                            <th style="border: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px;"> </th>
-                            <th style="border: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px; text-align: center;">
+                            <th style="border: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 3px; text-align: center;">
                                 Head
                             </th>
-                            <th style="border: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px; text-align: center;">
+                            <th style="border: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 3px; text-align: center;">
                                 Rate
                             </th>
-                            <th style="border: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px; text-align: center;">
+                            <th style="border: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 3px; text-align: center;">
                                 Payable
                             </th>
-                            <th style="border: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px; text-align: center;">
+                            <th style="border: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 3px; text-align: center;">
                                 Head
                             </th>
-                            <th style="border: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px; text-align: center;">
+                            <th style="border: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 3px; text-align: center;">
                                 Ded.
                             </th>
                         </tr>
                         <tr>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 2px; white-space: nowrap;">
                                 Present Days
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                <span t-field="doc.present_days"/>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 2px; text-align: center; width: 50px;">
+<!--                                 <span t-field="doc.present_days"/> -->
+                                25
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Basic+D A
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
-                                <span t-field="doc.employee_da"/>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
+                                <t t-esc="int(doc.employee_da) if doc.employee_da == int(doc.employee_da) else '{:.1f}'.format(doc.employee_da)"/>
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
-                                <span t-field="doc.employee_da"/>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
+                                <t t-esc="int(doc.employee_da) if doc.employee_da == int(doc.employee_da) else '{:.1f}'.format(doc.employee_da)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Provident Fund 12%
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
-                                <span t-field="doc.employee_id.provident_fund"/>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
+                                <t t-esc="str(int(doc.employee_id.provident_fund)) if doc.employee_id.provident_fund == int(doc.employee_id.provident_fund) else '{:.1f}'.format(doc.employee_id.provident_fund)"/>
                             </td>
                         </tr>
                         <tr>
@@ -196,17 +184,17 @@
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 House Rent Allowance
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
-                                <span t-field="doc.employee_hra"/>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
+                                <t t-esc="int(doc.employee_hra) if doc.employee_hra == int(doc.employee_hra) else '{:.1f}'.format(doc.employee_hra)"/>
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
-                                <span t-field="doc.employee_hra"/>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
+                                <t t-esc="int(doc.employee_hra) if doc.employee_hra == int(doc.employee_hra) else '{:.1f}'.format(doc.employee_hra)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Esic @0.75%
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
-                                <span t-field="doc.employee_id.employee_esic"/>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
+                                <t t-esc="'{0:,.0f}'.format(doc.employee_id.employee_esic) if doc.employee_id.employee_esic == int(doc.employee_id.employee_esic) else '{0:,.1f}'.format(doc.employee_id.employee_esic)"/>
                             </td>
                         </tr>
                         <tr>
@@ -219,17 +207,17 @@
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Conveyance Allowance
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 -
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 -
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Professional Tax
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
-                                <span t-field="doc.employee_id.professional_tax"/>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
+                                <t t-esc="'{0:.0f}'.format(doc.employee_id.professional_tax) if doc.employee_id.professional_tax == int(doc.employee_id.professional_tax) else '{0:.1f}'.format(doc.employee_id.professional_tax)"/>
                             </td>
                         </tr>
                         <tr>
@@ -242,16 +230,16 @@
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Washing Allowance
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 0
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 0
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 G L W F
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 0
                             </td>
                         </tr>
@@ -265,16 +253,16 @@
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Advance Bonus @8.33%
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 -
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 -
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Advance
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 0
                             </td>
                         </tr>
@@ -284,16 +272,16 @@
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Other Allowance
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 -
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 -
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Canteen
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 0
                             </td>
                         </tr>
@@ -303,16 +291,16 @@
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 P H wages
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 -
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 0
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Transport
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 0
                             </td>
                         </tr>
@@ -322,16 +310,16 @@
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Advance Bonus
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 -
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 0
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Other / Loan
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 0
                             </td>
                         </tr>
@@ -341,16 +329,16 @@
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Leave Payment
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 -
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 0
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Fine
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 0
                             </td>
                         </tr>
@@ -360,30 +348,74 @@
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Par. Incentive
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 -
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 0
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Loss Or Damages
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 0
                             </td>
                         </tr>
                         <tr>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px;"></td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px;"></td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Food Allowance
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 -
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px; text-align: right;">
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 0
+                            </td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                        </tr>
+
+                    <!--   Blank-->
+                        <tr>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
+                            </td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
+
+                            </td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
+
+                            </td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                        </tr>
+                        <tr>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
+                            </td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
+
+                            </td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
+
+                            </td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                        </tr>
+                        <tr>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px;"></td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px;">
+                            </td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px; text-align: center;">
+
+                            </td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px; text-align: center;">
+
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px;"></td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px;"></td>
@@ -394,36 +426,41 @@
                                     <br/>
                                     Including Holidays
                                 </td>
-                                <td style="text-align: center; border: none;"><span t-field="doc.total_payable_days"/> </td>
-                                <td colspan="2" style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: 1px solid black;">Gross Earned Wages</td>
-                                <td style="text-align: center;">
-                                    <!-- Calculate sum directly in QWeb -->
-                                    <t t-set="total_wages" t-value="doc.employee_hra + doc.employee_da"/>
-                                    <span t-esc="total_wages"/>
-                                </td>
-                                <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: 1px solid black;">Total Deductions</td>
-                                <td style="text-align: center;">
-                                    <!-- Calculate total deductions if needed -->
-                                    <t t-set="total_deductions"
-                                       t-value="doc.employee_id.provident_fund + doc.employee_id.employee_esic + doc.employee_id.professional_tax"/>
-                                    <span t-esc="total_deductions"/>
-                                </td>
+<!--                                <td style="text-align: center; border: none;"><span t-field="doc.total_payable_days"/> </td>-->
+                                <td style="text-align: center; border: none;">25 </td>
+                                <td colspan="2" style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: 1px solid black; text-align: center;">Gross Earned Wages</td>
+<!--                                <td style="text-align: center;">-->
+<!--                                    &lt;!&ndash; Calculate sum directly in QWeb &ndash;&gt;-->
+<!--                                    <t t-set="total_wages" t-value="doc.employee_hra + doc.employee_da"/>-->
+<!--                                    <span t-esc="total_wages"/>-->
+<!--                                </td>-->
+                                 <td style="text-align: center;">
+                                     <t t-set="total_wages" t-value="doc.employee_hra + doc.employee_da"/>
+                                     <t t-esc="'{:,}'.format(int(total_wages)) if total_wages == int(total_wages) else '{:,.1f}'.format(total_wages)"/>
+                                 </td>
+                                <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: 1px solid black;">Total</td>
+                                 <td style="text-align: center;">
+                                     <t t-set="total_deductions"
+                                        t-value="doc.employee_id.provident_fund + doc.employee_id.employee_esic + doc.employee_id.professional_tax"/>
+                                     <t t-esc="'{:,}'.format(int(total_deductions)) if total_deductions == int(total_deductions) else '{:,.1f}'.format(total_deductions)"/>
+                                 </td>
                             </tr>
                             <tr style="height: 30px; border: 1px solid black;">
-                                <td colspan="2"> </td>
-                                <td style="font-weight: bold; border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: 1px solid black;">NET PAYABLE</td>
-                                <td style="font-weight: bold; text-align: center;" colspan="4">
+                                <td colspan="3" style="text-align: right; font-weight: bold; "> NET PAYABLE </td>
+                                <td style="font-weight: bold; border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-left: none;border-bottom: 1px solid black;"> </td>
+                                <td style="font-weight: bold; text-align: center;" colspan="3">
                                     <!-- Calculate Net Payable dynamically -->
                                     <t t-set="net_payable" t-value="total_wages - total_deductions"/>
-                                    <span t-esc="net_payable"/>
+                                    <t t-esc="'{:,}'.format(int(net_payable)) if net_payable == int(net_payable) else '{:,.1f}'.format(net_payable)"/>
                                 </td>
                             </tr>
                             <tr style="font-size: 18px; height: 60px; border: 1px solid black;">
                                 <td colspan="5">
-                                    <p>
+                                    <p style="font-size: 20px; font-weight: bold;">
                                         <strong>Amount in Words:</strong>
-                                        <t t-esc="doc.company_id.currency_id.amount_to_text(net_payable)"/>
-
+                                        <span style="font-size: 14px; text-transform: capitalize;">
+                                            <t t-esc="doc.company_id.currency_id.amount_to_text(net_payable)"/>
+                                        </span>
                                     </p>
                                 </td>
                                 <td colspan="2" style="border-left: 1px solid black; border-right: none; border-top: none; border-bottom: 1px solid black;">
