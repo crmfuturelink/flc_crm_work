@@ -11,6 +11,7 @@
     'depends': ['om_hr_payroll', 'hr'],
     'data': [
         'views/hr_employee_view.xml',
+        'views/hr_contract_view.xml',
         'reports/flc_payslip_report.xml',
         'reports/flc_payslip_report_template.xml',
     ],

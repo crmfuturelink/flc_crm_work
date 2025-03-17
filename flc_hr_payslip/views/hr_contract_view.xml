@@ -1,0 +1,39 @@
+<odoo>
+    <record id="view_hr_contract_form_inherit_wages" model="ir.ui.view">
+        <field name="name">hr.contract.form.wages.deductions</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='information']" position="inside">
+                <group>
+                    <group name="wages_earned" string="Wages Earned">
+                        <field name="wage_basic_da"/>
+                        <field name="wage_hra"/>
+                        <field name="wage_conveyance"/>
+                        <field name="wage_washing"/>
+                        <field name="wage_bonus"/>
+                        <field name="wage_other_allowance"/>
+                        <field name="wage_ph"/>
+                        <field name="wage_advance_bonus"/>
+                        <field name="wage_leave_payment"/>
+                        <field name="wage_par_incentive"/>
+                        <field name="wage_food"/>
+                    </group>
+                    <group name="deductions" string="Deductions">
+                        <field name="deduction_pf"/>
+                        <field name="deduction_esic"/>
+                        <field name="deduction_prof_tax"/>
+                        <field name="deduction_glwf"/>
+                        <field name="deduction_advance"/>
+                        <field name="deduction_canteen"/>
+                        <field name="deduction_transport"/>
+                        <field name="deduction_other_loan"/>
+                        <field name="deduction_fine"/>
+                        <field name="deduction_loss_damage"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

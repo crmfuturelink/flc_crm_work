@@ -8,6 +8,7 @@
     </template>
 
     <template id="hr_payslip_custom_header">
+<!--        style="border-bottom: 1px solid #ddd; margin-top: 20px; padding-bottom: 10px;"-->
         <div class="header">
             <div class="row">
                 <div class="col-1">
@@ -52,6 +53,21 @@
         </div>
         <t t-out="0"/>
 
+<!--        <div class="footer text-center" style="border-top: 1px solid #ddd; padding-top: 10px; margin-top: 10px;">-->
+<!--            <div class="row">-->
+<!--                <div class="col-4">-->
+<!--                    <strong>Future Link Consultants Pvt Ltd</strong>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>-->
+<!--                </div>-->
+<!--                <div class="col-4">-->
+<!--                    <span class="page"/>-->
+<!--                    /-->
+<!--                    <span class="topage"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
     </template>
 
 
@@ -122,6 +138,7 @@
                 </div>
                 <br/>
                 <!--   Main Table Structure -->
+<!--style="height: 400px; width: 100%; border: 1px solid black;"-->
                 <div class="payroll_table" style="height: 400px; width: 100%;">
                     <table class="table" style="width: 100%; height: 700px; border-collapse: collapse;">
                         <tr>
@@ -134,6 +151,8 @@
                             </th>
                         </tr>
                         <tr>
+<!--                            <th style="border: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px;"> </th>-->
+<!--                            <th style="border: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 5px;"> </th>-->
                             <th style="border: 1px solid black; border-top: none; border-bottom: 1px solid black; padding: 3px; text-align: center;">
                                 Head
                             </th>
@@ -173,6 +192,9 @@
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 <t t-esc="str(int(doc.employee_id.provident_fund)) if doc.employee_id.provident_fund == int(doc.employee_id.provident_fund) else '{:.1f}'.format(doc.employee_id.provident_fund)"/>
                             </td>
+<!--                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">-->
+<!--                                <t t-esc="'{:,}'.format(int(doc.employee_id.provident_fund)) if doc.employee_id.provident_fund == int(doc.employee_id.provident_fund) else '{:,.1f}'.format(doc.employee_id.provident_fund)"/>-->
+<!--                            </td>-->
                         </tr>
                         <tr>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
@@ -208,10 +230,10 @@
                                 Conveyance Allowance
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                -
+                                <t t-esc="int(doc.conveyance_allowance) if doc.conveyance_allowance == int(doc.conveyance_allowance) else '{:.1f}'.format(doc.conveyance_allowance)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                -
+                                <t t-esc="int(doc.conveyance_allowance) if doc.conveyance_allowance == int(doc.conveyance_allowance) else '{:.1f}'.format(doc.conveyance_allowance)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Professional Tax
@@ -219,6 +241,9 @@
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
                                 <t t-esc="'{0:.0f}'.format(doc.employee_id.professional_tax) if doc.employee_id.professional_tax == int(doc.employee_id.professional_tax) else '{0:.1f}'.format(doc.employee_id.professional_tax)"/>
                             </td>
+<!--                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">-->
+<!--                                <t t-esc="'{0:,.0f}'.format(doc.employee_id.professional_tax) if doc.employee_id.professional_tax == int(doc.employee_id.professional_tax) else '{0:,.1f}'.format(doc.employee_id.professional_tax)"/>-->
+<!--                            </td>-->
                         </tr>
                         <tr>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
@@ -231,10 +256,10 @@
                                 Washing Allowance
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                0
+                                <t t-esc="int(doc.washing_allowance) if doc.washing_allowance == int(doc.washing_allowance) else '{:.1f}'.format(doc.washing_allowance)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                0
+                                <t t-esc="int(doc.washing_allowance) if doc.washing_allowance == int(doc.washing_allowance) else '{:.1f}'.format(doc.washing_allowance)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 G L W F
@@ -254,10 +279,10 @@
                                 Advance Bonus @8.33%
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                -
+                                <t t-esc="int(doc.advance_bonus) if doc.advance_bonus == int(doc.advance_bonus) else '{:.1f}'.format(doc.advance_bonus)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                -
+                                <t t-esc="int(doc.advance_bonus) if doc.advance_bonus == int(doc.advance_bonus) else '{:.1f}'.format(doc.advance_bonus)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Advance
@@ -267,16 +292,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"> </td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"> </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Other Allowance
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                -
+                                <t t-esc="int(doc.other_allowance) if doc.other_allowance == int(doc.other_allowance) else '{:.1f}'.format(doc.other_allowance)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                -
+                                <t t-esc="int(doc.other_allowance) if doc.other_allowance == int(doc.other_allowance) else '{:.1f}'.format(doc.other_allowance)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Canteen
@@ -286,16 +311,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"> </td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"> </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 P H wages
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                -
+                                <t t-esc="int(doc.ph_wages) if doc.ph_wages == int(doc.ph_wages) else '{:.1f}'.format(doc.ph_wages)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                0
+                                <t t-esc="int(doc.ph_wages) if doc.ph_wages == int(doc.ph_wages) else '{:.1f}'.format(doc.ph_wages)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Transport
@@ -305,16 +330,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"> </td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"> </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Advance Bonus
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                -
+                                <t t-esc="int(doc.wage_advance_bonus) if doc.wage_advance_bonus == int(doc.wage_advance_bonus) else '{:.1f}'.format(doc.wage_advance_bonus)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                0
+                                <t t-esc="int(doc.wage_advance_bonus) if doc.wage_advance_bonus == int(doc.wage_advance_bonus) else '{:.1f}'.format(doc.wage_advance_bonus)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Other / Loan
@@ -324,16 +349,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"> </td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"> </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Leave Payment
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                -
+                                <t t-esc="int(doc.leave_payment) if doc.leave_payment == int(doc.leave_payment) else '{:.1f}'.format(doc.leave_payment)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                0
+                                <t t-esc="int(doc.leave_payment) if doc.leave_payment == int(doc.leave_payment) else '{:.1f}'.format(doc.leave_payment)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Fine
@@ -343,16 +368,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"> </td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"> </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Par. Incentive
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                -
+                                <t t-esc="int(doc.partial_incentive) if doc.partial_incentive == int(doc.partial_incentive) else '{:.1f}'.format(doc.partial_incentive)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                0
+                                <t t-esc="int(doc.partial_incentive) if doc.partial_incentive == int(doc.partial_incentive) else '{:.1f}'.format(doc.partial_incentive)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Loss Or Damages
@@ -362,19 +387,19 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"> </td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"> </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Food Allowance
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                -
+                                 <t t-esc="int(doc.food_allowance) if doc.food_allowance == int(doc.food_allowance) else '{:.1f}'.format(doc.food_allowance)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                0
+                                 <t t-esc="int(doc.food_allowance) if doc.food_allowance == int(doc.food_allowance) else '{:.1f}'.format(doc.food_allowance)"/>
                             </td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
-                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"></td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"> </td>
+                            <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;"> </td>
                         </tr>
 
                     <!--   Blank-->
@@ -435,7 +460,9 @@
 <!--                                    <span t-esc="total_wages"/>-->
 <!--                                </td>-->
                                  <td style="text-align: center;">
-                                     <t t-set="total_wages" t-value="doc.employee_hra + doc.employee_da"/>
+                                     <t t-set="total_wages" t-value="doc.employee_hra + doc.employee_da + doc.conveyance_allowance +
+                                     doc.washing_allowance + doc.advance_bonus + doc.other_allowance + doc.ph_wages + doc.wage_advance_bonus
+                                     + doc.leave_payment + doc.partial_incentive + doc.food_allowance"/>
                                      <t t-esc="'{:,}'.format(int(total_wages)) if total_wages == int(total_wages) else '{:,.1f}'.format(total_wages)"/>
                                  </td>
                                 <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: 1px solid black;">Total</td>
