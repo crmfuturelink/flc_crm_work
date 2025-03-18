@@ -1,20 +1,42 @@
 <odoo>
-    <record id="view_employee_form_inherit_category" model="ir.ui.view">
-        <field name="name">hr.employee.form.inherit.category</field>
+<!--    <record id="view_employee_form_inherit_category" model="ir.ui.view">-->
+<!--        <field name="name">hr.employee.form.inherit.category</field>-->
+<!--        <field name="model">hr.employee</field>-->
+<!--        <field name="inherit_id" ref="hr.view_employee_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            &lt;!&ndash; Insert Employee Category field after Work Email &ndash;&gt;-->
+<!--            <xpath expr="//sheet/group/group/field[@name='work_email']" position="after">-->
+<!--                <field name="employee_category"/>-->
+<!--                <field name="provident_fund"/>-->
+<!--                <field name="employee_esic"/>-->
+<!--                <field name="professional_tax"/>-->
+<!--                <field name="employee_doj"/>-->
+<!--                <field name="aadhar_no"/>-->
+<!--                <field name="pf_no"/>-->
+<!--                <field name="eisc_no"/>-->
+<!--                <field name="uan_no"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="view_hr_employee_form_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit.hr_settings</field>
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
-            <!-- Insert Employee Category field after Work Email -->
-            <xpath expr="//sheet/group/group/field[@name='work_email']" position="after">
-                <field name="employee_category"/>
-                <field name="provident_fund"/>
-                <field name="employee_esic"/>
-                <field name="professional_tax"/>
-                <field name="employee_doj"/>
-                <field name="aadhar_no"/>
-                <field name="pf_no"/>
-                <field name="eisc_no"/>
-                <field name="uan_no"/>
+            <!-- Insert new fields after the Payroll group -->
+            <xpath expr="//page[@name='hr_settings']/group/group[@name='payroll_group']" position="after">
+                <group string="Additional Payroll Details">
+                    <field name="employee_category"/>
+                    <field name="provident_fund"/>
+                    <field name="employee_esic"/>
+                    <field name="professional_tax"/>
+                    <field name="employee_doj"/>
+                    <field name="aadhar_no"/>
+                    <field name="pf_no"/>
+                    <field name="eisc_no"/>
+                    <field name="uan_no"/>
+                </group>
             </xpath>
         </field>
     </record>
