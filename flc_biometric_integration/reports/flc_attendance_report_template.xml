@@ -5,7 +5,7 @@
     <template id="biometric_attendance_report">
         <t t-call="web.html_container">
             <div class="page">
-                <h2 class="center-text">Biometric Attendance Report</h2>
+                <h2 class="center-text">Biometric Attendance Report2</h2>
                 <t t-foreach="docs" t-as="doc">
                     <t t-if="doc.attendance_type == 'in'">
                         <t t-call="flc_biometric_integration.biometric_attendance_report_template"/>
@@ -69,7 +69,7 @@
                 }
             </style>
 
-            <div class="table-container">
+            <div class="table-container" style="margin-top: 60px;">
                 <table class="table" style=" height: auto; width: 100%;" >
                     <tr>
                         <td>

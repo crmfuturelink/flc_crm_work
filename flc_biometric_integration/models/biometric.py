@@ -10,6 +10,7 @@
 ###############################################################################
 
 from odoo import models, fields, api
+from datetime import date, timedelta
 import requests
 from lxml import etree
 
@@ -63,6 +64,37 @@ class BiometricAttendanceLog(models.Model):
     summary_record_id = fields.Many2one('biometric.attendance.log', "Summary Record", compute="_compute_summary_record",
                                         store=True)
     attendance_logs = fields.One2many('biometric.attendance.log.line', 'attendance_log_id', string="Attendance Logs")
+
+    def get_date_range(self):
+        """Return a list of dates for the report period"""
+        # Static date range: January 25 to February 26 of the current year
+        current_year = fields.Date.today().year
+        date_from = date(current_year, 1, 25)
+        date_to = date(current_year, 2, 26)
+
+        dates = []
+        current_date = date_from
+        while current_date <= date_to:
+            dates.append(current_date)
+            current_date += timedelta(days=1)
+
+        return dates
+
+
+    def _find_summary_record(self, employee_id, date):
+        """Find the summary record for the employee on the given date"""
+        # Convert date string to date object if needed
+        if isinstance(date, str):
+            date = fields.Date.from_string(date)
+
+        # Find the record that has the attendance summary
+        summary_record = self.env['biometric.attendance.log'].search([
+            ('employee_id', '=', employee_id),
+            ('attendance_date', '=', date),
+            ('is_first_record', '=', True)
+        ], limit=1)
+
+        return summary_record
 
     def get_employee_attendance(self, employee_id, attendance_date):
         """Fetch attendance data for a specific employee and date."""
@@ -215,6 +247,68 @@ class BiometricAttendanceLog(models.Model):
             else:
                 result.append((record.id, "New Attendance Log"))
         return result
+    #####----------------------- Register Formate Document-------------------------#####
+    # def get_status(self, employee_id, date):
+    #     # Logic to determine attendance status (P, A, WO, etc.)
+    #     attendance = self.env['hr.attendance'].search([
+    #         ('employee_id', '=', employee_id),
+    #         ('check_in', '>=', date + ' 00:00:00'),
+    #         ('check_in', '<=', date + ' 23:59:59')
+    #     ], limit=1)
+    #
+    #     if attendance:
+    #         return 'P'  # Present
+    #     else:
+    #         # Check for leaves, weekly offs, etc.
+    #         return 'A'  # Absent
+
+    # def get_in_time1(self, employee_id, date):
+    #     # Get first check-in time
+    #     attendance = self.env['hr.attendance'].search([
+    #         ('employee_id', '=', employee_id),
+    #         ('check_in', '>=', date + ' 00:00:00'),
+    #         ('check_in', '<=', date + ' 23:59:59')
+    #     ], order='check_in asc', limit=1)
+    #
+    #     if attendance:
+    #         return fields.Datetime.from_string(attendance.check_in).strftime('%H:%M')
+    #     return ''
+
+    # def get_out_time1(self, employee_id, date):
+    #     # Get first check-out time
+    #     attendance = self.env['hr.attendance'].search([
+    #         ('employee_id', '=', employee_id),
+    #         ('check_in', '>=', date + ' 00:00:00'),
+    #         ('check_in', '<=', date + ' 23:59:59')
+    #     ], order='check_in asc', limit=1)
+    #
+    #     if attendance and attendance.check_out:
+    #         return fields.Datetime.from_string(attendance.check_out).strftime('%H:%M')
+    #     return ''
+    #
+    # def get_in_time2(self, employee_id, date):
+    #     # Get second check-in time (if applicable)
+    #     attendances = self.env['hr.attendance'].search([
+    #         ('employee_id', '=', employee_id),
+    #         ('check_in', '>=', date + ' 00:00:00'),
+    #         ('check_in', '<=', date + ' 23:59:59')
+    #     ], order='check_in asc')
+    #
+    #     if len(attendances) > 1:
+    #         return fields.Datetime.from_string(attendances[1].check_in).strftime('%H:%M')
+    #     return ''
+    #
+    # def get_out_time2(self, employee_id, date):
+    #     # Get second check-out time (if applicable)
+    #     attendances = self.env['hr.attendance'].search([
+    #         ('employee_id', '=', employee_id),
+    #         ('check_in', '>=', date + ' 00:00:00'),
+    #         ('check_in', '<=', date + ' 23:59:59')
+    #     ], order='check_in asc')
+    #
+    #     if len(attendances) > 1 and attendances[1].check_out:
+    #         return fields.Datetime.from_string(attendances[1].check_out).strftime('%H:%M')
+    #     return ''
 
 class ReportBiometricAttendance(models.AbstractModel):
     _name = 'report.flc_biometric_integration.attendance_register1'

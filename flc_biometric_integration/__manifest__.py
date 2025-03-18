@@ -33,6 +33,7 @@
         'reports/flc_attendance_report.xml',
         'reports/flc_attendance_report_template.xml',
         'reports/biometric_attendance_register_template_v1.xml',
+        'reports/biometric_attendance_monthly_register.xml',
         'views/menu_item.xml',
 
     ],

@@ -1,3 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <template id="report_attendance_register_flc">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page" style="margin-top: 30px; padding-top: 20px;">
+                    <!-- Report Header -->
+                    <div class="text-center">
+                        <h3>Monthly Status Report (Detailed Work Duration(Four Punch))</h3>
+                    </div>
 
+                    <t t-foreach="docs" t-as="o">
+                        <div class="oe_structure"/>
+
+                        <!-- Date Range -->
+                        <div class="text-center mb-4">
+                            26 Feb 2025 To 25 March 2025
+                        </div>
+
+                        <!-- Company Information -->
+                        <br/><br/><br/>
+                        <div class="row mb-3">
+<!--                            <div class="col-6">-->
+<!--                                <strong>Company:</strong>-->
+<!--                            </div>-->
+                            <div class="col-6 text-right">
+                                <strong>Printed On:</strong> <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%b %d %Y %H:%M')"/>
+                            </div>
+                        </div>
+
+                        <!-- Days Header Row -->
+<!--                        <table class="table table-bordered" style="font-size: 11px; margin-top: 10px;">-->
+<!--                            <thead>-->
+<!--                                <tr>-->
+<!--                                    <th style="width: 7%; ">Days</th>-->
+<!--                                    <t t-foreach="o.get_date_range()" t-as="date">-->
+<!--                                        <th style="width: 3%;" class="text-center">-->
+<!--                                            <span t-esc="date.day"/>-->
+<!--                                            <span t-esc="date.strftime('%a')[0]"/>-->
+<!--                                        </th>-->
+<!--                                    </t>-->
+<!--                                </tr>-->
+<!--                            </thead>-->
+<!--                        </table>-->
+
+
+
+
+                                             <!-- Employee Information -->
+<!--                        <t t-foreach="o.employee_id" t-as="employee">-->
+                            <div class="row mb-2">
+                                <div class="col-2">
+                                    <strong>Employee ID :</strong>
+                                    <t t-esc="o.user_id"/>
+                                </div>
+                                <div class="col-3">
+                                    <strong>Employee:</strong>
+                                    <t t-esc="o.employee_name"/>
+<!--                                    <span t-field="employee.employee_code"/> : <span t-field="employee.name"/>-->
+                                </div>
+                                <div class="col-7">
+                                    <small>
+                                        <strong>Total Work Duration:</strong> XX Hrs.
+                                        <strong>Total OT:</strong> XX Hrs.
+                                        <strong>Present:</strong> XX
+                                        <strong>Absent:</strong> XX
+                                        <strong>WeeklyOff:</strong> XX
+                                        <strong>Holidays:</strong> XX
+                                        <strong>Leaves Taken:</strong> XX
+                                        <strong>Late By Hrs:</strong> XX
+                                        <br/>
+                                        <strong>Late By Days:</strong> XX
+                                        <strong>Early By Hrs:</strong> XX
+                                        <strong>Early going By Days:</strong> XX
+                                        <strong>Total Duration(+OT):</strong> XX
+                                        <strong>Average Working Hrs:</strong> XX
+                                    </small>
+                                </div>
+                            </div>
+                            <br/><br/>
+                    <!--       Main table -->
+
+                        <table class="table table-bordered" style="font-size: 10px;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 7%; ">Days</th>
+                                    <t t-foreach="o.get_date_range()" t-as="date">
+                                        <th style="width: 3%;" class="text-center">
+                                            <span t-esc="date.day"/>
+                                            <span t-esc="date.strftime('%a')[0]"/>
+                                        </th>
+                                    </t>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>InTime1</th>
+                                    <t t-foreach="o.get_date_range()" t-as="date">
+                                        <td class="text-center"> X
+<!--                                            <t t-esc="o.get_in_time1(employee.id, date) or 'N/A'"/>-->
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>OutTime1</th>
+                                    <t t-foreach="o.get_date_range()" t-as="date">
+                                        <td class="text-center"> X
+<!--                                            <t t-esc="o.get_out_time1(employee.id, date) or 'N/A'"/>-->
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>InTime2</th>
+                                    <t t-foreach="o.get_date_range()" t-as="date">
+                                        <td class="text-center"> X
+<!--                                            <t t-esc="o.get_in_time2(employee.id, date) or 'N/A'"/>-->
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>OutTime2</th>
+                                    <t t-foreach="o.get_date_range()" t-as="date">
+                                        <td class="text-center"> X
+<!--                                            <t t-esc="o.get_out_time2(employee.id, date) or 'N/A'"/>-->
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Duration</th>
+                                    <t t-foreach="o.get_date_range()" t-as="date">
+                                        <td class="text-center"> X
+<!--                                            <t t-esc="o.get_duration(employee.id, date) or '0.0'"/>-->
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Late By</th>
+                                    <t t-foreach="o.get_date_range()" t-as="date">
+                                        <td class="text-center"> X
+<!--                                            <t t-esc="o.get_late_by(employee.id, date) or 'N/A'"/>-->
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Early By</th>
+                                    <t t-foreach="o.get_date_range()" t-as="date">
+                                        <td class="text-center"> X
+<!--                                            <t t-esc="o.get_early_by(employee.id, date) or 'N/A'"/>-->
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>OT</th>
+                                    <t t-foreach="o.get_date_range()" t-as="date">
+                                        <td class="text-center"> X
+<!--                                            <t t-esc="o.get_ot_hours(employee.id, date) or 'N/A'"/>-->
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Shift</th>
+                                    <t t-foreach="o.get_date_range()" t-as="date">
+                                        <td class="text-center"> X
+<!--                                            <t t-esc="o.get_shift(employee.id, date) or 'GS'"/>-->
+                                        </td>
+                                    </t>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                            <!-- Attendance Details Table -->
+<!--                            <table class="table table-bordered" style="font-size: 10px;">-->
+<!--                                <tr>-->
+<!--                                    <th style="width: 7%;">Status</th>-->
+<!--                                        <td style="width: 3%;" class="text-center"> XXX-->
+<!--                                        </td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th>InTime1</th>-->
+<!--                                        <td class="text-center">-->
+<!--                                            <t t-esc="o.first_check_in or 'N/A'"/>-->
+<!--                                        </td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th>OutTime1</th>-->
+<!--                                        <td class="text-center">-->
+<!--                                            <t t-esc="o.last_check_out or 'N/A'"/>-->
+<!--                                        </td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th>InTime2</th>-->
+<!--                                        <td class="text-center"> X-->
+<!--                                        </td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th>OutTime2</th>-->
+<!--                                        <td class="text-center"> X-->
+<!--                                        </td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th>Duration</th>-->
+<!--                                        <td class="text-center">-->
+<!--                                            <t t-esc="doc.total_hours or 0.0"/>-->
+<!--                                        </td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th>Late By</th>-->
+<!--                                        <td class="text-center"> X-->
+<!--                                        </td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th>Early By</th>-->
+<!--                                        <td class="text-center"> X-->
+<!--                                        </td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th>OT</th>-->
+<!--                                        <td class="text-center"> X-->
+<!--                                        </td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th>Shift</th>-->
+<!--                                        <td class="text-center"> GS-->
+<!--                                        </td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                        </t>-->
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+
+<!--    <template id="report_attendance_register_flc">-->
+<!--        <t t-call="web.html_container">-->
+<!--            <t t-call="web.external_layout">-->
+<!--                <div class="page">-->
+<!--                    <t t-foreach="docs" t-as="o">-->
+<!--                        <div class="oe_structure"/>-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+<!--                        <div class="text-center">-->
+<!--                            <h2>Employee Attendance (Four Punch)</h2>-->
+<!--                        </div>-->
+<!--                        <br/>-->
+<!--                        <div class="row mb-2">-->
+<!--                            <div class="col-6">-->
+<!--                                <strong>Period:</strong>  1 feb 2024 To  28 Feb 2024-->
+<!--                            </div>-->
+<!--                            <div class="col-6 text-right">-->
+<!--                                <strong>Printed On:</strong>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <table class="table table-bordered mt32" style="font-size: 13px;">-->
+<!--                            <thead>-->
+<!--                                <tr>-->
+<!--                                    <th name="th_sno" class="text-left">-->
+<!--                                        <span>S.No</span>-->
+<!--                                    </th>-->
+<!--                                    <th name="th_dept" class="text-left">-->
+<!--                                        <span>Department</span>-->
+<!--                                    </th>-->
+<!--                                    <th name="th_emp_name" class="text-left">-->
+<!--                                        <span>Name of Employee</span>-->
+<!--                                    </th>-->
+<!--                                    <th name="th_designation" class="text-left">-->
+<!--                                        <span>Designation</span>-->
+<!--                                    </th>-->
+<!--                                    <th colspan="35" name="th_date" class="text-center">-->
+<!--                                        <span>Dates</span>-->
+<!--                                    </th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td colspan="4">-->
+<!--                                    </td>-->
+<!--&lt;!&ndash;                                    <td t-foreach="o.get_data()" t-as="line" class="text-center">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <span t-esc="line['date_list']"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </td>&ndash;&gt;-->
+<!--                                </tr>-->
+<!--                            </thead>-->
+<!--&lt;!&ndash;                            <t t-foreach="o.employee_ids" t-as="employee">&ndash;&gt;-->
+<!--                                &lt;!&ndash; Status Row &ndash;&gt;-->
+<!--                                <tr>-->
+<!--                                    <td rowspan="5" class="align-middle">##-->
+<!--&lt;!&ndash;                                        <span t-esc="employee_index+1"/>&ndash;&gt;-->
+<!--                                    </td>-->
+<!--                                    <td rowspan="5" class="align-middle">IT-->
+<!--&lt;!&ndash;                                        <span t-field="employee.department_id"/>&ndash;&gt;-->
+<!--                                    </td>-->
+<!--                                    <td rowspan="5" class="align-middle">Akansha-->
+<!--&lt;!&ndash;                                        <span t-esc="employee.name"/>&ndash;&gt;-->
+<!--                                    </td>-->
+<!--                                    <td rowspan="5" class="align-middle">HR-->
+<!--&lt;!&ndash;                                        <span t-field="employee.job_id.name"/>&ndash;&gt;-->
+<!--                                    </td>-->
+<!--                                    <td t-foreach="o.get_data()" t-as="date" class="text-center">-->
+<!--                                        <span t-esc="o.get_status(employee.id, date['date_list'])"/>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                                &lt;!&ndash; InTime1 Row &ndash;&gt;-->
+<!--                                <tr>-->
+<!--                                    <td t-foreach="o.get_data()" t-as="date" class="text-center">-->
+<!--                                        <span t-esc="o.get_in_time1(employee.id, date['date_list'])"/>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                                &lt;!&ndash; OutTime1 Row &ndash;&gt;-->
+<!--                                <tr>-->
+<!--                                    <td t-foreach="o.get_data()" t-as="date" class="text-center">-->
+<!--                                        <span t-esc="o.get_out_time1(employee.id, date['date_list'])"/>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                                &lt;!&ndash; InTime2 Row &ndash;&gt;-->
+<!--                                <tr>-->
+<!--                                    <td t-foreach="o.get_data()" t-as="date" class="text-center">-->
+<!--                                        <span t-esc="o.get_in_time2(employee.id, date['date_list'])"/>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                                &lt;!&ndash; OutTime2 Row &ndash;&gt;-->
+<!--                                <tr>-->
+<!--                                    <td t-foreach="o.get_data()" t-as="date" class="text-center">-->
+<!--                                        <span t-esc="o.get_out_time2(employee.id, date['date_list'])"/>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--&lt;!&ndash;                            </t>&ndash;&gt;-->
+<!--                        </table>-->
+
+<!--                        &lt;!&ndash; Summary Information &ndash;&gt;-->
+<!--                        <div class="row mt-4">-->
+<!--                            <div class="col-12">-->
+<!--                                <strong>Summary:</strong>-->
+<!--                                <p>-->
+<!--                                    Total Work Duration:  Hrs.-->
+<!--                                    Total OT:  Hrs.-->
+<!--                                    Present:-->
+<!--                                    Absent:-->
+<!--                                    Weekly Off:-->
+<!--                                    Holidays:-->
+<!--                                    Leaves Taken:-->
+<!--                                    Late By Hrs:-->
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </t>-->
+<!--                </div>-->
+<!--            </t>-->
+<!--        </t>-->
+<!--    </template>-->
 </odoo>
+
