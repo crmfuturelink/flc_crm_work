@@ -24,6 +24,7 @@
         </field>
     </record>
 
+    <!--this is for status Bar on Employee-->
     <record id="view_employee_form_inherit_stage" model="ir.ui.view">
         <field name="name">hr.employee.form.stage</field>
         <field name="model">hr.employee</field>
@@ -36,6 +37,47 @@
             </xpath>
         </field>
     </record>
+
+    <!--This is for Kanban View Leave and present Status-->
+    <record id="view_employee_kanban_inherit_presence" model="ir.ui.view">
+        <field name="name">hr.employee.kanban.inherit.presence</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_kanban_details']" position="inside">
+                <div class="o_kanban_record_body">
+                    <div class="text-muted">
+                       <field name="hr_presence_state"/>
+                    </div>
+                    <div class="text-muted">
+                         <field name="current_leave_id"/>
+                    </div>
+                    <div class="text-muted">
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+     <record id="view_employee_filter_inherit_stage" model="ir.ui.view">
+        <field name="name">hr.employee.filter.inherit.stage</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="inside">
+                <group string="Employee Stages">
+                    <filter name="group_new_joined" string="New / Joined" domain="[('stage', '=', 'new')]"/>
+                    <filter name="group_probation" string="Probation" domain="[('stage', '=', 'probation')]"/>
+                    <filter name="group_employment" string="Employment" domain="[('stage', '=', 'employment')]"/>
+                    <filter name="group_pip" string="PIP" domain="[('stage', '=', 'pip')]"/>
+                    <filter name="group_notice_period" string="Notice Period" domain="[('stage', '=', 'notice_period')]"/>
+                    <filter name="group_relieved" string="Relieved" domain="[('stage', '=', 'relieved')]"/>
+                    <filter name="group_rejoined" string="Rejoined" domain="[('stage', '=', 'rejoined')]"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
 
 </odoo>
 
