@@ -1,4 +1,5 @@
-from odoo import models, fields
+from odoo import models, fields,api
+from datetime import date, timedelta
 
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
@@ -55,4 +56,27 @@ class HrEmployee(models.Model):
         ('relieved', 'Relieved'),
         ('rejoined', 'Rejoined'),
     ], string="Employee Stage", default="new", tracking=True)
+
+    @api.model
+    def check_probation_status(self):
+        """ Cron job to check probation completion and notify managers """
+        today = date.today()
+        print("today :::::", today)
+        employees = self.search([
+            ('stage', '=', 'probation'),
+            ('joining_date', '<=', today)])
+        print("employee :::::", employees)
+        for emp in employees:
+            emp._notify_managers_about_probation()
+
+    def _notify_managers_about_probation(self):
+        """Notify the reporting manager when an employee completes 3 months probation."""
+        # three_months_ago = date.today() - timedelta(days=90)
+        # employees = self.search([('joining_date', '=', three_months_ago)])
+        #
+        # for emp in employees:
+        if self.parent_id:  # Reporting Manager exists
+            message = f"Employee {self.name} joining date{self.joining_date}  has completed their 3-month probation period ."
+            print("message :::::", message)
+            self.parent_id.message_post(body=message, subtype_xmlid="mail.mt_comment", partner_ids=[self.parent_id.id])
 

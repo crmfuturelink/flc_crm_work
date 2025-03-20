@@ -10,6 +10,8 @@
     'license': 'LGPL-3',
     'depends': ['om_hr_payroll', 'hr'],
     'data': [
+        'security/ir.model.access.csv',
+        'data/ir_cron.xml',
         'views/hr_employee_view.xml',
         'views/hr_contract_view.xml',
         'reports/flc_payslip_report.xml',
