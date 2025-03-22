@@ -8,6 +8,10 @@
             <!-- Insert new fields after the Payroll group -->
             <xpath expr="//page[@name='hr_settings']/group/group[@name='payroll_group']" position="after">
                 <group string="leave Details">
+                    <field name="daily_reporting_timing"/>
+                    <field name="break_timing"/>
+                    <field name="weekly_off_type"/>
+                    <field name="employee_team"/>
                     <field name="has_weekend_off"/>
                     <field name="last_leave_allocation"/>
                     <field name="annual_leave_balance"/>

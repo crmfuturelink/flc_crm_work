@@ -21,6 +21,25 @@ class HrEmployee(models.Model):
     last_leave_allocation = fields.Date(string="Last Paid Monthly Allocation Date", default=False)
     annual_leave_balance = fields.Float(string="Monthly Paid Leave Balance", default=0.0)
     used_annual_leaves_this_month = fields.Integer(string="Used Monthly Leaves This Month", default=0)
+    weekly_off_type = fields.Selection([
+        ('sunday', 'Sunday Off'),
+        ('saturday_sunday', 'Saturday & Sunday Off')
+    ], string="Weekly Off Type", default='sunday')
+
+    employee_team = fields.Selection([
+        ('india', 'India Team'),
+        ('canada', 'Canada Team')
+    ], string="Employee Team", required=True, default='india')
+    daily_reporting_timing = fields.Selection([
+        ('10_7', '10:00 AM - 7:00 PM'),
+        ('9_6', '9:00 AM - 6:00 PM'),
+        ('9_30_6_30', '9:30 AM - 6:30 PM'),
+    ], string="Daily Reporting Time", default='10_7')
+    break_timing = fields.Selection([
+        ('1_1_45', '1:00 PM - 1:45 PM'),
+        ('1_45_2_30', '1:45 PM - 2:30 PM'),
+        ('1_2_30', '1:00 PM - 2:30 PM'),
+    ], string="Break Timing", default='1_2_30')
 
     ##hr.contract.type###
     """

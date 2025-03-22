@@ -14,6 +14,7 @@
         'data/ir_cron.xml',
         'views/hr_employee_view.xml',
         'views/hr_contract_view.xml',
+        'views/hr_leave_view.xml',
         'reports/flc_payslip_report.xml',
         'reports/flc_payslip_report_template.xml',
     ],
