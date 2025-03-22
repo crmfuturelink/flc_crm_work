@@ -1,11 +1,34 @@
 <odoo>
-    <data noupdate="1">
+    <data noupdate="0">
         <record id="cron_check_probation_status" model="ir.cron">
-            <field name="name">Check Employee Probation Status</field>
+            <field name="name">FLC: Check Employee Probation Status</field>
             <field name="model_id" ref="hr.model_hr_employee"/>
             <field name="state">code</field>
             <field name="code">model.check_probation_status()</field>
             <field name="interval_type">days</field>
+            <field name="interval_number">1</field>
+            <field name="numbercall">-1</field>
+            <field name="active">True</field>
+        </record>
+
+
+        <record id="cron_allocate_monthly_leaves" model="ir.cron">
+            <field name="name">FLC: Allocate Monthly Leaves</field>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">model.allocate_monthly_leaves()</field>
+            <field name="interval_type">months</field>
+            <field name="interval_number">1</field>
+            <field name="numbercall">-1</field>
+            <field name="active">True</field>
+        </record>
+
+         <record id="cron_reset_annual_leave_limit" model="ir.cron">
+            <field name="name">FLC : Reset Monthly Annual Leave Limit</field>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">model.reset_monthly_leave_limit()</field>
+            <field name="interval_type">months</field>
             <field name="interval_number">1</field>
             <field name="numbercall">-1</field>
             <field name="active">True</field>

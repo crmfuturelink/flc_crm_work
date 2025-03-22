@@ -7,6 +7,12 @@
         <field name="arch" type="xml">
             <!-- Insert new fields after the Payroll group -->
             <xpath expr="//page[@name='hr_settings']/group/group[@name='payroll_group']" position="after">
+                <group string="leave Details">
+                    <field name="has_weekend_off"/>
+                    <field name="last_leave_allocation"/>
+                    <field name="annual_leave_balance"/>
+                    <field name="used_annual_leaves_this_month"/>
+                </group>
                 <group string="Additional Payroll Details">
                     <field name="employee_type_id"/>
                     <field name="stage"/>

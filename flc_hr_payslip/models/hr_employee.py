@@ -16,6 +16,11 @@ class HrEmployee(models.Model):
     pf_no  = fields.Char(string='PF No')
     uan_no  = fields.Char(string='UAN No')
     eisc_no  = fields.Char(string='EISC No')
+    branch_id = fields.Many2one('res.branch', string="Branch")
+    has_weekend_off = fields.Boolean(string="Has Saturday-Sunday Off")
+    last_leave_allocation = fields.Date(string="Last Leave Allocation Date", default=False)
+    annual_leave_balance = fields.Float(string="Annual Leave Balance", default=0.0)
+    used_annual_leaves_this_month = fields.Integer(string="Used Monthly Leaves This Month", default=0)
 
     ##hr.contract.type###
     """
@@ -38,7 +43,13 @@ class HrEmployee(models.Model):
      * Paid based on work hours (pro-rata basis).
     ----------------------------------------------
     """
-    employee_type_id = fields.Many2one('hr.contract.type', string="Employee Type", help="Employee Contract Type")
+    employee_type_id = fields.Many2one('hr.contract.type', string="Work Type", help="Employee Contract Type")
+    employee_type = fields.Selection([
+        ('full_time', 'Full-Time'),
+        ('part_time', 'Part-Time'),
+        ('intern', 'Intern'),
+        ('contract', 'Contract Basis'),
+    ], string="Employee Type", required=True)
     """
     FLC CRM - Employee Stages Module
 
@@ -80,3 +91,58 @@ class HrEmployee(models.Model):
             print("message :::::", message)
             self.parent_id.message_post(body=message, subtype_xmlid="mail.mt_comment", partner_ids=[self.parent_id.id])
 
+    @api.model
+    def reset_monthly_leave_limit(self):
+        """ Reset annual leave usage counter and set annual_leave_balance to 0 at the start of each month """
+        employees = self.search([])
+        employees.write({
+            'used_annual_leaves_this_month': 0,  # Reset used monthly leaves
+            'annual_leave_balance': 0  # Reset annual leave balance
+        })
+
+    def allocate_monthly_leaves(self):
+        """ Automatically allocate 1.5 leave every month for full-time employees """
+        print("allocate_monthly_leaves::::::::::::::::::", self, self._context)
+        today = date.today()
+
+        # Retrieve all full-time employees who have no weekend off
+        employees = self.env['hr.employee'].search([
+            ('employee_type', '=', 'full_time'),
+            ('stage', '=', 'employment'),
+            ('has_weekend_off', '=', False)  # Only Mon-Sat employees eligible
+        ])
+        for emp in employees:
+            # Skip if leave has already been allocated this month
+            if emp.last_leave_allocation and emp.last_leave_allocation.month == today.month:
+                continue  # Already allocated this month
+
+            # Find the leave type 'Full Day Leave'
+            leave_type = self.env['hr.leave.type'].search([('name', '=', 'Full Day Leave')], limit=1)
+
+            if not leave_type:
+                raise ValueError("Leave Type 'Full Day Leave' is missing. Please configure it in Odoo.")
+            # Auto-allocate leave without approval
+            self.env['hr.leave.allocation'].create({
+                'name': f'Monthly Paid Leave for {emp.name}',
+                'holiday_status_id': leave_type.id,
+                'employee_id': emp.id,
+                'number_of_days': 1.5,
+                'state': 'confirm',  # Automatically approved
+            })
+
+            # Update the last leave allocation date
+            emp.write({'last_leave_allocation': today, 'annual_leave_balance':1.5})
+            # Notify Employee
+            emp.message_post(
+                body=f"You have been granted 1.5 days of leave for {today.strftime('%B')}.",
+                subtype_xmlid="mail.mt_comment"
+            )
+
+            # Notify Manager
+            if emp.parent_id:
+                emp.parent_id.message_post(
+                    body=f"{emp.name} has received 1.5 days of leave for {today.strftime('%B')}.",
+                    subtype_xmlid="mail.mt_comment"
+                )
+
+        return True
