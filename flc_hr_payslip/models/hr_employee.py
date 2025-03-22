@@ -18,8 +18,8 @@ class HrEmployee(models.Model):
     eisc_no  = fields.Char(string='EISC No')
     branch_id = fields.Many2one('res.branch', string="Branch")
     has_weekend_off = fields.Boolean(string="Has Saturday-Sunday Off")
-    last_leave_allocation = fields.Date(string="Last Leave Allocation Date", default=False)
-    annual_leave_balance = fields.Float(string="Annual Leave Balance", default=0.0)
+    last_leave_allocation = fields.Date(string="Last Paid Monthly Allocation Date", default=False)
+    annual_leave_balance = fields.Float(string="Monthly Paid Leave Balance", default=0.0)
     used_annual_leaves_this_month = fields.Integer(string="Used Monthly Leaves This Month", default=0)
 
     ##hr.contract.type###

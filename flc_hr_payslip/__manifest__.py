@@ -8,7 +8,7 @@
     'description': "FLC Pay Slip PDF",
     'website': '',
     'license': 'LGPL-3',
-    'depends': ['om_hr_payroll', 'hr'],
+    'depends': ['om_hr_payroll', 'hr', 'hr_holidays'],
     'data': [
         'security/ir.model.access.csv',
         'data/ir_cron.xml',
