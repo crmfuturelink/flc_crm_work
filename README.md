@@ -8,7 +8,8 @@ This repository contains several interconnected modules that make up the FLC Int
 - FLC Employment type and Employment Stages on Employee
 1. Notify the reporting manager when an employee completes 3 months probation
 2. Reset annual leave usage counter at the start of each month
-3. Automatically allocate 1.5 leave every month for full-time employees 
+3. Automatically allocate 1.5 leave every month for full-time employees
+4. automated payroll calculations based on Attendence Marked
 
 **Employee Apply leave and Approve by Reporting Manger
 Video Source : https://www.awesomescreenshot.com/video/37799044?key=44735d62c67ce35845a1a2058c1b9965
