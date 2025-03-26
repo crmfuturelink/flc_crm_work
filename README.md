@@ -28,8 +28,10 @@ Video Source : https://www.awesomescreenshot.com/video/37799044?key=44735d62c67c
 - V 1.0 -  Development of FLC Biometric Integration
 - V 2.0 -  Auto synchronization for all check-in and check-out logs
 - V 3.0 -  Advanced search and filtering to filter employees , Employee Code by month, day, and check-in type.
-- V 4.0 -  Biometric Attendance Report
-- V 5.0 -  Register Formate Added
+- V 4.0 -  Biometric Attendance Report *Individual report* 
+- V 5.0 -  Register Formate Added *in-progress*
+- v 6.0 -  Employee linked to Their attendance
+- v 7.6 -  Payslip Calculation based on Attendance
 
 ### 5. FLC CRM Help
 """Provides an easy-to-use interface for new users,<br/>
