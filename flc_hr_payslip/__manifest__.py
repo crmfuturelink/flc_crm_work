@@ -8,15 +8,17 @@
     'description': "FLC Pay Slip PDF",
     'website': '',
     'license': 'LGPL-3',
-    'depends': ['om_hr_payroll', 'hr', 'hr_holidays'],
+    'depends': ['om_hr_payroll', 'hr', 'hr_holidays', 'flc_biometric_integration'],
     'data': [
         'security/ir.model.access.csv',
         'data/ir_cron.xml',
         'views/hr_employee_view.xml',
         'views/hr_contract_view.xml',
         'views/hr_leave_view.xml',
+        'views/hr_payslip_view.xml',
         'reports/flc_payslip_report.xml',
         'reports/flc_payslip_report_template.xml',
+        # 'reports/future_link_payslip_template.xml',
     ],
     'assets': {
         'web.report_assets_common': [

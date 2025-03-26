@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--    main template-->
+    <template id="report_flc_payslip_templates">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="flc_hr_payslip.report_future_link_payslip_custom_template"/>
+            </t>
+        </t>
+    </template>
+
+    <!--    header Template-->
+    <template id="custom_payslip_external_header_layout">
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-12"
+                                 style="width: 100px; margin-left: -1em;">
+                                <t t-if="doc.employee_id.employee_category == 'consultant'">
+                                    <img src="/flc_hr_payslip/static/src/FLC Logo-01.png" alt="Consultant Logo"
+                                         class="img-fluid"/>
+                                </t>
+                                <t t-elif="doc.employee_id.employee_category == 'education'">
+                                    <img src="/flc_hr_payslip/static/src/future-links-logo.png" alt="Education Logo"
+                                         class="img-fluid"/>
+                                </t>
+                            </div>
+<!--                            <div class="col-2"-->
+<!--                                 style="width: 100px; display: inline;">-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <t t-if="doc.company_id">
+                            <div class="text-end" style="margin-right: -1em;">
+                                <span class="fw-bold">
+                                    <t t-esc="doc.company_id.name"/>
+                                    <br/>
+                                </span>
+                                <span class="text-muted">
+                                    <t t-esc="doc.company_id.phone"/>
+                                    <br/>
+                                    <t t-esc="doc.company_id.street"/>
+                                    <br/>
+                                    <t t-esc="doc.company_id.city"/>
+                                    <t t-esc="doc.company_id.state_id.name"/>
+                                    <t t-esc="doc.company_id.zip"/>
+                                    <br/>
+                                    <t t-esc="doc.company_id.country_id.name"/>
+                                </span>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+            <div style="border-bottom: 1px solid black;"> </div>
+        </div>
+
+        <div class="article">
+            <t t-out="0"/>
+        </div>
+
+        <div class="footer o_standard_footer">
+            <div style="border-bottom: 1px solid black;"> </div>
+            <div style="display: flex; justify-content: space-between; padding: 4px 10px;">
+                <div style="text-align: left;">
+                    <p class="text-muted">
+                        <span t-esc="doc.get_current_datetime()" />
+                    </p>
+                </div>
+                <div style="text-align: right;">
+                    <p class="text-muted">
+                        <span class="page"/>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </template>
+
+    <!--   Future Link  Payslip Custom Page Layout-->
+    <template id="report_future_link_payslip_custom_template">
+        <t t-call="flc_hr_payslip.custom_payslip_external_header_layout">
+            <!--   page Content-->
+
+
+            <h1>Pay Slip Demo ...</h1>
+
+        </t>
+    </template>
+</odoo>

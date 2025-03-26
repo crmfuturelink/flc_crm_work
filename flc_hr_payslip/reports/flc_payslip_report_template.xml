@@ -76,9 +76,14 @@
             <div class="page" style="margin-top: -2px !important;">
                 <div style="border: 2px solid black; font-family: Arial, sans-serif;">
                     <center>
-                        <p style="margin-bottom: 10px;">
-                            <b>PaySlip for the Month of March</b>
-<!--                            <span t-field="doc.date_from" t-options='{"format": "MMMM yyyy"}'/>-->
+<!--                        <p style="margin-bottom: 10px;">-->
+<!--                            <b>PaySlip for the Month of-->
+<!--                                <span t-field="doc.date_from" t-options='{"format": "MMMM yyyy"}'/>-->
+<!--                            </b>-->
+<!--                        </p>-->
+                        <p>
+                            PaySlip for:<span t-field="doc.date_from" t-options='{"format": "dd MMMM yyyy"}'/> to
+                            <span t-field="doc.date_to" t-options='{"format": "dd MMMM yyyy"}'/>
                         </p>
                     </center>
 
@@ -174,8 +179,7 @@
                                 Present Days
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 2px; text-align: center; width: 50px;">
-<!--                                 <span t-field="doc.present_days"/> -->
-                                25
+                                 <span t-field="doc.total_working_days"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Basic+D A
@@ -184,7 +188,7 @@
                                 <t t-esc="int(doc.employee_da) if doc.employee_da == int(doc.employee_da) else '{:.1f}'.format(doc.employee_da)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px; text-align: center;">
-                                <t t-esc="int(doc.employee_da) if doc.employee_da == int(doc.employee_da) else '{:.1f}'.format(doc.employee_da)"/>
+                                <t t-esc="int(doc.basic_da) if doc.basic_da == int(doc.basic_da) else '{:.1f}'.format(doc.basic_da)"/>
                             </td>
                             <td style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: none; padding: 5px;">
                                 Provident Fund 12%
@@ -452,7 +456,9 @@
                                     Including Holidays
                                 </td>
 <!--                                <td style="text-align: center; border: none;"><span t-field="doc.total_payable_days"/> </td>-->
-                                <td style="text-align: center; border: none;">25 </td>
+                                <td style="text-align: center; border: none;">
+<!--                                  <t t-set="total_leaves" t-value="doc.total_working_days + '' "/>-->
+                                </td>
                                 <td colspan="2" style="border-left: 1px solid black; border-right: 1px solid black; border-top: none; border-bottom: 1px solid black; text-align: center;">Gross Earned Wages</td>
 <!--                                <td style="text-align: center;">-->
 <!--                                    &lt;!&ndash; Calculate sum directly in QWeb &ndash;&gt;-->
@@ -460,7 +466,7 @@
 <!--                                    <span t-esc="total_wages"/>-->
 <!--                                </td>-->
                                  <td style="text-align: center;">
-                                     <t t-set="total_wages" t-value="doc.employee_hra + doc.employee_da + doc.conveyance_allowance +
+                                     <t t-set="total_wages" t-value="doc.employee_hra + doc.basic_da + doc.conveyance_allowance +
                                      doc.washing_allowance + doc.advance_bonus + doc.other_allowance + doc.ph_wages + doc.wage_advance_bonus
                                      + doc.leave_payment + doc.partial_incentive + doc.food_allowance"/>
                                      <t t-esc="'{:,}'.format(int(total_wages)) if total_wages == int(total_wages) else '{:,.1f}'.format(total_wages)"/>
@@ -491,7 +497,7 @@
                                     </p>
                                 </td>
                                 <td colspan="2" style="border-left: 1px solid black; border-right: none; border-top: none; border-bottom: 1px solid black;">
-                                    <strong>For Future Link Consultants Pvt. Ltd</strong>
+                                    <p style="font-size: 12px;">For Future Link Consultants Pvt. Ltd</p>
                                 </td>
 
                             </tr>

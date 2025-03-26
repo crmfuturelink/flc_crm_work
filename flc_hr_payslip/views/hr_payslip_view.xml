@@ -1,0 +1,118 @@
+<odoo>
+        <!-- Add Attendance fields to Payslip Form -->
+    <record id="view_hr_payslip_form_inherit_biometric" model="ir.ui.view">
+        <field name="name">hr.payslip.form.inherit.biometric</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Attendance">
+                    <group>
+                        <group string="FLC Details Payslips">
+                            <field name="month_days"/>
+                            <field name="total_paid_days"/>
+                            <field name="weekly_off"/>
+                            <field name="days_off"/>
+                            <field name="paid_holidays"/>
+                            <field name="unpaid_holidays"/>
+                            <field name="working_days"/>
+                            <field name="max_payable_days"/>
+                            <field name="lwp"/>
+                            <field name="net_paid_days"/>
+                            <field name="present_days"/>
+                            <field name="paid_leaves"/>
+                            <field name="worked_days"/>
+                            <field name="payable_day"/>
+                        </group>
+                        <group string="Biometric Details">
+                            <field name="total_working_days"/>
+                            <field name="days_worked"/>
+<!--                            <field name="biometric_attendance_ids" widget="many2many_tags"/>-->
+                        </group>
+                         <button name="generate_payslips" string="Generate Payslips" type="object"
+                                    class="oe_highlight"/>
+                    </group>
+                </page>
+                <page string="FLC Payslip Details">
+                    <group>
+                      <group string="Wages Earned">
+                            <field name="basic_da"/>
+                            <field name="hra"/>
+                            <field name="conveyance_allowance"/>
+                            <field name="washing_allowance"/>
+                            <field name="advance_bonus_833"/>
+                            <field name="other_allowance"/>
+                            <field name="ph_wages"/>
+                            <field name="advance_bonus"/>
+                            <field name="leave_payment"/>
+                            <field name="partial_incentive"/>
+                            <field name="food_allowance"/>
+                      </group>
+                      <group string="Deductions">
+                            <field name="provident_fund"/>
+                            <field name="e_s_i_c"/>
+                            <field name="professional_tax"/>
+                            <field name="g_l_w_f"/>
+                            <field name="advance"/>
+                            <field name="canteen"/>
+                            <field name="transport"/>
+                            <field name="loan_deduction"/>
+                            <field name="fine"/>
+                            <field name="loss_damages"/>
+                      </group>
+                    </group>
+                    <group>
+                        <group string="Net Payable">
+                            <field name="total_earnings"/>
+                            <field name="total_deductions"/>
+                        </group>
+                        <group string="Bank Details">
+                            <field name="net_salary"/>
+                        </group>
+                    </group>
+
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Add Attendance Based field to Salary Rule Form -->
+<!--    <record id="hr_salary_rule_form_inherit_biometric" model="ir.ui.view">-->
+<!--        <field name="name">hr.salary.rule.form.inherit.biometric</field>-->
+<!--        <field name="model">hr.salary.rule</field>-->
+<!--        <field name="inherit_id" ref="hr_payroll.hr_salary_rule_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//group[@name='general']" position="inside">-->
+<!--                <field name="attendance_based"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <!-- Create Attendance Input Type (data) -->
+<!--    <record id="input_type_attendance" model="hr.payslip.input.type">-->
+<!--        <field name="name">Attendance Based Adjustment</field>-->
+<!--        <field name="code">ATTENDANCE</field>-->
+<!--    </record>-->
+
+      <!-- Create Attendance Salary Rule (data) -->
+<!--    <record id="salary_rule_attendance_basic" model="hr.salary.rule">-->
+<!--        <field name="name">Basic Salary (Attendance Based)</field>-->
+<!--        <field name="sequence">5</field>-->
+<!--        <field name="code">BASIC_ATT</field>-->
+<!--        <field name="category_id" ref="hr_payroll.BASIC"/>-->
+<!--        <field name="condition_select">python</field>-->
+<!--        <field name="condition_python">result = employee.attendance_based_pay</field>-->
+<!--        <field name="amount_select">code</field>-->
+<!--        <field name="amount_python_compute">-->
+<!--# Calculate based on attendance-->
+<!--days_worked = payslip.days_worked-->
+<!--total_days = payslip.total_working_days-->
+
+<!--if total_days > 0:-->
+<!--    result = contract.wage * (days_worked / total_days)-->
+<!--else:-->
+<!--    result = 0-->
+<!--        </field>-->
+<!--        <field name="attendance_based">True</field>-->
+<!--    </record>-->
+</odoo>

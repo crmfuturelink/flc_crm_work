@@ -2,7 +2,7 @@ from odoo import models, fields, api
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import pytz
-
+from calendar import monthrange
 from odoo.odoo.tools.populate import compute
 
 
@@ -45,6 +45,31 @@ class HrPayslip(models.Model):
     overtime_hours = fields.Float(string='Overtime Hours', compute='_compute_attendance_days')
     weekly_off_days = fields.Float(string='Weekly Off Days', compute='_compute_attendance_days')
     total_payable_days = fields.Float(string='Total Payable Days', default='25')
+
+
+    # def _compute_payable_days(self):
+    #     for payslip in self:
+    #         total_days = payslip.date_to.day - payslip.date_from.day + 1
+    #         leave_days = self.env['hr.leave'].search_count([
+    #             ('employee_id', '=', payslip.employee_id.id),
+    #             ('state', '=', 'validate'),
+    #             ('date_from', '>=', payslip.date_from),
+    #             ('date_to', '<=', payslip.date_to)
+    #         ])
+    #         late_deductions = self.env['hr.attendance'].search_count([
+    #             ('employee_id', '=', payslip.employee_id.id),
+    #             ('is_late', '=', True),
+    #             ('check_in', '>=', payslip.date_from),
+    #             ('check_out', '<=', payslip.date_to)
+    #         ])
+    #         payslip.payable_days = total_days - leave_days - (late_deductions * 0.5)  # Half-day deduction per late
+
+    def compute_salary(self):
+        for payslip in self:
+            daily_salary = payslip.contract_id.wage / 30  # Assuming 30-day month
+            total_salary = daily_salary * payslip.payable_days
+
+            payslip.write({'amount': total_salary})
 
 
     @api.model
@@ -186,7 +211,7 @@ class HrPayslip(models.Model):
     def _get_da(self):
         """This Method is Used For DA in Pay Slip and Data getting Form Hr contract"""
         for rec in self:
-            rec.employee_da = rec.employee_id.contract_id.wage_basic_da
+            rec.employee_da = rec.employee_id.contract_id.da
 
     def _get_wage_without_currency(self):
         for rec in self:

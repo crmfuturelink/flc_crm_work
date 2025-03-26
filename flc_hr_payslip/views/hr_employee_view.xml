@@ -5,9 +5,16 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
+
+            <xpath expr="//sheet/group/group/field[@name='work_email']" position="before">
+                <field name="is_bio_metric_synced"/>
+            </xpath>
             <!-- Insert new fields after the Payroll group -->
             <xpath expr="//page[@name='hr_settings']/group/group[@name='payroll_group']" position="after">
                 <group string="leave Details">
+<!--                    <field name="break_time"/>-->
+<!--                    <field name="access_time"/>-->
+                    <field name="attendance_based_pay"/>
                     <field name="daily_reporting_timing"/>
                     <field name="break_timing"/>
                     <field name="weekly_off_type"/>
@@ -20,6 +27,9 @@
                 <group string="Additional Payroll Details">
                     <field name="employee_type_id"/>
                     <field name="stage"/>
+                    <field name="probation_status"/>
+                    <field name="probation_end_date"/>
+                    <field name="extended_probation_date"/>
                     <field name="employee_category"/>
                     <field name="provident_fund"/>
                     <field name="employee_esic"/>
@@ -30,6 +40,30 @@
                     <field name="eisc_no"/>
                     <field name="uan_no"/>
                 </group>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string='Employee Attendance'>
+                    <group>
+                        <group string="Total Working Hours Current Month">
+                            <field name="break_time"/>
+                            <field name="access_time"/>
+                        </group>
+                        <group>
+
+                        </group>
+                    </group>
+                    <field name="bio_attendance_ids">
+                        <tree string="Employee Attendance" editable="0">
+                            <field name="attendance_date"/>
+                            <field name="first_check_in"/>
+                            <field name="last_check_out"/>
+                            <field name="break_time"/>
+                            <field name="access_time"/>
+                            <field name="total_hours"/>
+                        </tree>
+                    </field>
+                </page>
+
             </xpath>
         </field>
     </record>
@@ -63,6 +97,7 @@
                          <field name="current_leave_id"/>
                     </div>
                     <div class="text-muted">
+<!--                         <field name="branch_id"/>-->
                     </div>
                 </div>
             </xpath>
@@ -87,6 +122,7 @@
             </xpath>
         </field>
     </record>
+
 
 
 </odoo>
