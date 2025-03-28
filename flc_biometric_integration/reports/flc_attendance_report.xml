@@ -66,4 +66,281 @@
         <field name="binding_type">report</field>
     </record>
 
+    <record id="action_report_flc_biometric_attendance_register_wiz" model="ir.actions.report">
+        <field name="name">FLC Biometric Employee Attendance Register Report wiz</field>
+        <field name="model">monthly.status.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">flc_biometric_integration.report_attendance_register_flc_wiz</field>
+        <field name="report_file">flc_biometric_integration.report_attendance_register_flc_wiz</field>
+        <field name="paperformat_id" ref="flc_biometric_integration.paperformat_flc_biometric_attendance_register"/>
+        <field name="binding_model_id" ref="model_monthly_status_report_wizard"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_attendance_register_flc_wiz">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                     <br/>
+                    <div>
+                        <center>
+                            <h2>Biometric Attendance Register</h2>
+                            <p>From:
+                                <t t-esc="date_from"/>
+                                To:
+                                <t t-esc="date_to"/>
+                            </p>
+                        </center>
+                    </div>
+
+                    <br/>
+                    <div class="row mb-2">
+                            <div class="col-2">
+                                <strong>Employee ID :</strong>
+
+                            </div>
+                            <div class="col-3">
+                                <strong>Employee:</strong>
+
+                            </div>
+                            <div class="col-7">
+                                <small>
+                                    <strong>Total Work Duration:</strong>
+                                    XX Hrs.
+                                    <strong>Total OT:</strong>
+                                    XX Hrs.
+                                    <strong>Present:</strong>
+                                    XX
+                                    <strong>Absent:</strong>
+                                    XX
+                                    <strong>WeeklyOff:</strong>
+                                    XX
+                                    <strong>Holidays:</strong>
+                                    XX
+                                    <strong>Leaves Taken:</strong>
+                                    XX
+                                    <strong>Late By Hrs:</strong>
+                                    XX
+                                    <br/>
+                                    <strong>Late By Days:</strong>
+                                    XX
+                                    <strong>Early By Hrs:</strong>
+                                    XX
+                                    <strong>Early going By Days:</strong>
+                                    XX
+                                    <strong>Total Duration(+OT):</strong>
+                                    XX
+                                    <strong>Average Working Hrs:</strong>
+                                    XX
+                                </small>
+                            </div>
+                        </div>
+
+
+
+
+                    <p>
+                        <strong>Report Details:</strong>
+                    </p>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Department Name</th>
+                                <th>Employee Name</th>
+                                <th>Employee ID</th>
+                                <th>Present Days</th>
+                                <th>Absent Days</th>
+                                <th>Total Work Hours</th>
+                                <th>Attendance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="report_details" t-as="record">
+                                <tr>
+                                    <td>
+                                        <t t-esc="record.get('department_name', '')"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="record.get('employee_name', '')"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="record.get('employee_id', '')"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="record.get('present_days', '')"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="record.get('absent_days', '')"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="record.get('total_work_hours', '')"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="record.get('attendance', '')"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+
+                    <p>
+                        <strong>All Logs:</strong>
+                    </p>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+<!--                                <th>Logs ID</th>-->
+                                <th>Logs Date</th>
+                                <th>Check-in Time</th>
+                                <th>Check-out Time</th>
+                                <th>Total Hours Worked</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="report_details" t-as="report">
+                                <tr>
+                                    <td colspan="4">
+
+                                        <strong>
+                                            <center>
+                                                <t t-esc="report['employee_name']"/>
+                                            </center>
+
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <t t-foreach="report['attendance_logs']" t-as="log">
+
+                                    <tr>
+                                        <td>
+                                            <t t-esc="log['attendance_date']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="log['first_check_in']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="log['last_check_out']"/>
+                                        </td>
+                                        <td>
+<!--                                            <t t-esc="'{:.1f}'.format(log['total_hours'])"/>-->
+                                        </td>
+                                    </tr>
+
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+
+                     <!--   Main table  -->
+<!--                    <table class="table table-bordered" style="font-size: 10px;">-->
+<!--                        <thead>-->
+<!--                            <t t-set="dates" t-value="get_date_range()"/>-->
+<!--                            <tr>-->
+<!--                                <th style="width: 7%;">Days</th>-->
+<!--                                <t t-foreach="dates" t-as="date">-->
+<!--                                    <th style="width: 3%;" class="text-center">-->
+<!--                                        <span t-esc="date.day"/>-->
+<!--                                        <span t-esc="date.strftime('%a')[0]"/>-->
+<!--                                    </th>-->
+<!--                                </t>-->
+<!--                            </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                            <tr>-->
+<!--                                <th>InTime1</th>-->
+<!--                                <t t-foreach="get_date_range()" t-as="date">-->
+<!--                                    <td class="text-center">-->
+<!--                                        X-->
+<!--                                    </td>-->
+<!--                                </t>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <th>OutTime1</th>-->
+<!--                                <t t-foreach="get_date_range()" t-as="date">-->
+<!--                                    <td class="text-center">-->
+<!--                                        X-->
+<!--                                    </td>-->
+<!--                                </t>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <th>InTime2</th>-->
+<!--                                <t t-foreach="get_date_range()" t-as="date">-->
+<!--                                    <td class="text-center">-->
+<!--                                        X-->
+<!--                                    </td>-->
+<!--                                </t>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <th>OutTime2</th>-->
+<!--                                <t t-foreach="get_date_range()" t-as="date">-->
+<!--                                    <td class="text-center">-->
+<!--                                        X-->
+<!--                                    </td>-->
+<!--                                </t>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <th>Duration</th>-->
+<!--                                <t t-foreach="get_date_range()" t-as="date">-->
+<!--                                    <td class="text-center">-->
+<!--                                        X-->
+<!--                                    </td>-->
+<!--                                </t>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <th>Late By</th>-->
+<!--                                <t t-foreach="get_date_range()" t-as="date">-->
+<!--                                    <td class="text-center">-->
+<!--                                        X-->
+<!--                                    </td>-->
+<!--                                </t>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <th>Early By</th>-->
+<!--                                <t t-foreach="get_date_range()" t-as="date">-->
+<!--                                    <td class="text-center">-->
+<!--                                        X-->
+<!--                                    </td>-->
+<!--                                </t>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <th>OT</th>-->
+<!--                                <t t-foreach="get_date_range()" t-as="date">-->
+<!--                                    <td class="text-center">-->
+<!--                                        X-->
+<!--                                    </td>-->
+<!--                                </t>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <th>Shift</th>-->
+<!--                                <t t-foreach="get_date_range()" t-as="date">-->
+<!--                                    <td class="text-center">-->
+<!--                                        X-->
+<!--                                    </td>-->
+<!--                                </t>-->
+<!--                            </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+                </div>
+            </t>
+        </t>
+    </template>
+
 </odoo>

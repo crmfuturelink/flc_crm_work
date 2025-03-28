@@ -52,11 +52,15 @@ class BiometricAttendanceLog(models.Model):
     terminal_id = fields.Many2one('biometric.terminal', "Branch")
     attendance_type = fields.Selection([('in', 'Check-In'), ('out', 'Check-Out')], "Type")
     employee_id = fields.Many2one('hr.employee', string="Employee")
+    date_from = fields.Date("From Date")
+    date_to = fields.Date("From Date")
 
     # Daily summary fields
     first_check_in = fields.Datetime("First Check-In", compute="_compute_attendance_summary", store=True)
     last_check_out = fields.Datetime("Last Check-Out", compute="_compute_attendance_summary", store=True)
     all_logs = fields.Text("Log Details", compute="_compute_attendance_summary")
+    break_time = fields.Float("Total Break Time (Minutes)")
+    access_time = fields.Float("Total Worked Hours")
 
     # New fields for better reporting
     total_hours = fields.Float("Total Hours", compute="_compute_attendance_summary", store=True)

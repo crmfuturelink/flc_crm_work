@@ -39,6 +39,7 @@ class BiometricAttendanceWizard(models.TransientModel):
 
     @api.model
     def cron_fetch_attendance_logs(self):
+        print("\nCron Job Started::::::::::::::::::: Now Time is: ", fields.Datetime.now())
         terminals = self.env['biometric.terminal'].search([])
         for terminal in terminals:
             wizard = self.create({
@@ -50,6 +51,7 @@ class BiometricAttendanceWizard(models.TransientModel):
 
 
     def fetch_attendance_logs(self):
+        print("\n self",self, self._context)
         url = "http://116.72.248.17/iclock/webapiservice.asmx"
         headers = {"Content-Type": "text/xml"}
         data = f'''<?xml version="1.0" encoding="utf-8"?>

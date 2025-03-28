@@ -7,6 +7,7 @@
             <form string="Monthly Status Report">
                 <group>
                     <field name="department_id"/>
+<!--                    <field name="employee_id"/>-->
                     <field name="from_date"/>
                     <field name="to_date"/>
                 </group>
@@ -38,7 +39,7 @@
                     <field name="to_date" readonly="1"/>
                 </group>
                 <group>
-                    <field name="report_data" widget="html"/>
+<!--                    <field name="report_data" widget="html"/>-->
                 </group>
                 <footer>
                     <button string="Close" class="oe_link" special="cancel"/>
