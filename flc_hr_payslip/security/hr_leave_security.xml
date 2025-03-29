@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <!-- Employee Group -->
+        <record id="group_hr_leave_employee" model="res.groups">
+            <field name="name">Employee</field>
+            <field name="category_id" ref="base.module_category_human_resources"/>
+        </record>
+
+        <!-- Manager Group -->
+        <record id="group_hr_leave_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="base.module_category_human_resources"/>
+        </record>
+
+        <!-- HR Group -->
+        <record id="group_hr_leave_hr" model="res.groups">
+            <field name="name">HR</field>
+            <field name="category_id" ref="base.module_category_human_resources"/>
+        </record>
+
+        <!-- Admin (Santosh Sir) -->
+        <record id="group_hr_leave_admin" model="res.groups">
+            <field name="name">Admin</field>
+            <field name="category_id" ref="base.module_category_human_resources"/>
+        </record>
+    </data>
+</odoo>

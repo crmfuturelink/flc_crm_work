@@ -1,4 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_hr_employee_read,Access HR Employee Read,model_hr_employee,base.group_user,1,1,1,1
 flc_hr_payslip.access_employee_attendance,access_employee_attendance,flc_hr_payslip.model_employee_attendance,base.group_user,1,1,1,1
+flc_hr_payslip.access_hr_probation_wizard,access_hr_probation_wizard,flc_hr_payslip.model_hr_probation_wizard,base.group_user,1,1,1,1
+
 

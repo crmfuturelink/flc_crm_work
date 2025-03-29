@@ -5,7 +5,23 @@
         <field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='holiday_status_id']" position="after">
-                <field name="approval_status"/>
+                <field name="emergency_reason"/>
+                <field name="leave_status" readonly="1"/>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button name="action_approve_paid" string="Approve Paid Leave" type="object" class="btn-primary"
+                        groups="flc_hr_payslip.group_hr_leave_manager,flc_hr_payslip.group_hr_leave_hr"/>
+                <button name="action_approve_unpaid" string="Approve Unpaid Leave" type="object" class="btn-primary"
+                        groups="flc_hr_payslip.group_hr_leave_manager,flc_hr_payslip.group_hr_leave_hr"/>
+                <button name="action_approve_half_day" string="Approve Half Day Leave" type="object"
+                        class="btn-primary"
+                        groups="flc_hr_payslip.group_hr_leave_manager,flc_hr_payslip.group_hr_leave_hr"/>
+                <button name="action_unapprove" string="Unapprove Leave" type="object" class="btn-danger"
+                        groups="flc_hr_payslip.group_hr_leave_manager,flc_hr_payslip.group_hr_leave_hr"/>
+                <button name="action_approve_comp_off" string="Approve Comp Off" type="object" class="btn-primary"
+                        groups="flc_hr_payslip.group_hr_leave_manager,flc_hr_payslip.group_hr_leave_hr"/>
+                <button name="action_unapprove_comp_off" string="Unapprove Comp Off" type="object" class="btn-danger"
+                        groups="flc_hr_payslip.group_hr_leave_manager,flc_hr_payslip.group_hr_leave_hr"/>
             </xpath>
         </field>
     </record>

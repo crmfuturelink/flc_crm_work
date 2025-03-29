@@ -5,6 +5,10 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
+<!--            <xpath expr="//header" position="inside">-->
+<!--                <button name="open_probation_wizard" string="Probation" type="object"-->
+<!--                        class="oe_highlight" invisible="('stage','==', probation)"/>-->
+<!--            </xpath>-->
 
             <xpath expr="//sheet/group/group/field[@name='work_email']" position="before">
                 <field name="is_bio_metric_synced"/>
@@ -12,8 +16,6 @@
             <!-- Insert new fields after the Payroll group -->
             <xpath expr="//page[@name='hr_settings']/group/group[@name='payroll_group']" position="after">
                 <group string="leave Details">
-<!--                    <field name="break_time"/>-->
-<!--                    <field name="access_time"/>-->
                     <field name="attendance_based_pay"/>
                     <field name="daily_reporting_timing"/>
                     <field name="break_timing"/>
@@ -25,11 +27,14 @@
                     <field name="used_annual_leaves_this_month"/>
                 </group>
                 <group string="Additional Payroll Details">
-                    <field name="employee_type_id"/>
                     <field name="stage"/>
-                    <field name="probation_status"/>
+                    <field name="job_start_date"/>
                     <field name="probation_end_date"/>
+                    <field name="probation_status"/>
+                    <field name="extend_option"/>
                     <field name="extended_probation_date"/>
+                    <field name="parent_user_id"/>
+                    <field name="employee_type_id"/>
                     <field name="employee_category"/>
                     <field name="provident_fund"/>
                     <field name="employee_esic"/>
@@ -41,6 +46,8 @@
                     <field name="uan_no"/>
                 </group>
             </xpath>
+
+            <!--   groups="flc_hr_payslip.group_hr_leave_manager"-->
             <xpath expr="//notebook" position="inside">
                 <page string='Employee Attendance'>
                     <group>
@@ -64,6 +71,27 @@
                     </field>
                 </page>
 
+                <!--   groups="flc_hr_payslip.group_hr_leave_hr"-->
+                <page string="Documents">
+                    <group>
+                        <group>
+                            <field name="offer_letter" filename="offer_letter_filename" invisible="1"/>
+                            <field name="offer_letter" widget="pdf_viewer"/>
+
+                            <field name="loi_document" filename="loi_filename" invisible="1"/>
+                            <field name="loi_document" widget="pdf_viewer"/>
+                        </group>
+
+                        <group>
+                            <field name="onboarding_document" filename="onboarding_filename" invisible="1"/>
+                            <field name="onboarding_document" widget="pdf_viewer"/>
+
+                            <field name="annexure_document" filename="annexure_filename" invisible="1"/>
+                            <field name="annexure_document" widget="pdf_viewer"/>
+                        </group>
+                    </group>
+                </page>
+
             </xpath>
         </field>
     </record>
@@ -74,10 +102,10 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//header" position="inside">
-                <group>
-                    <field name="stage" widget="statusbar"/>
-                </group>
+            <xpath expr="//header" position="inside">#invisible="'stage','==', probation"
+                <button name="open_probation_wizard" string="Probation" type="object"
+                        class="oe_highlight"/>
+                <field name="stage" widget="statusbar"/>
             </xpath>
         </field>
     </record>
@@ -114,7 +142,6 @@
                     <filter name="group_new_joined" string="New / Joined" domain="[('stage', '=', 'new')]"/>
                     <filter name="group_probation" string="Probation" domain="[('stage', '=', 'probation')]"/>
                     <filter name="group_employment" string="Employment" domain="[('stage', '=', 'employment')]"/>
-                    <filter name="group_pip" string="PIP" domain="[('stage', '=', 'pip')]"/>
                     <filter name="group_notice_period" string="Notice Period" domain="[('stage', '=', 'notice_period')]"/>
                     <filter name="group_relieved" string="Relieved" domain="[('stage', '=', 'relieved')]"/>
                     <filter name="group_rejoined" string="Rejoined" domain="[('stage', '=', 'rejoined')]"/>
@@ -124,6 +151,4 @@
     </record>
 
 
-
 </odoo>
-

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_hr_probation_wizard_form" model="ir.ui.view">
+        <field name="name">hr.probation.wizard.form</field>
+        <field name="model">hr.probation.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Probation Approval">
+                <group>
+                    <field name="employee_id" readonly="1"/>
+                    <field name="probation_status" required="1"/>
+                    <field name="extend_option" invisab="'probation_status', '!=', extended"/>
+<!--                    <field name="extended_probation_date" invisab="'probation_status','!=', extended"/>-->
+                </group>
+                <footer>
+                    <button name="extended_date" string="Extend" type="object" class="oe_highlight"/>
+                    <button name="confirm_action" string="Confirm" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

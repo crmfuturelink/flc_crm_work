@@ -40,41 +40,54 @@ class HrEmployee(models.Model):
 
     break_time = fields.Float("Total Break Time (Minutes)", compute="_compute_attendance", store=True)
     access_time = fields.Float("Total Worked Hours", compute="_compute_attendance", store=True)
+    #Employee Doucments
+    document_ids = fields.Many2many(
+        'ir.attachment',
+        string="Employee Documents",
+        help="Upload all employee-related documents such as offer letters, ID proofs, and contracts."
+    )
+    offer_letter = fields.Binary(string="Offer Letter", attachment=True)
+    offer_letter_filename = fields.Char(string="Offer Letter Filename")
+    loi_document = fields.Binary(string="LOI Document", attachment=True)
+    loi_filename = fields.Char(string="LOI Filename")
+    onboarding_document = fields.Binary(string="Onboarding Document", attachment=True)
+    onboarding_filename = fields.Char(string="Onboarding Filename")
+    annexure_document = fields.Binary(string="Annexure Document", attachment=True)
+    annexure_filename = fields.Char(string="Annexure Filename")
 
-    probation_end_date = fields.Date(string="Probation End Date", compute="_compute_probation_end_date", store=True)
-    probation_status = fields.Selection([
-        ('pending', 'Pending'),
-        ('completed', 'Completed'),
-        ('extended', 'Extended')
-    ], string="Probation Status", default='pending', tracking=True)
-    extended_probation_date = fields.Date(string="Extended Probation Date")
+    #Probition Period Status-------------------
+    job_start_date = fields.Date(string="Joining Date", tracking=True)
+    probation_end_date = fields.Date(string="Probation End Date", compute="_compute_probation_end_date", store=True, tracking=True)
+    probation_status = fields.Selection([('pending', 'Pending'), ('completed', 'Completed'), ('extended', 'Extended')
+                                         ], string="Probation Status", default='pending', tracking=True)
+    extended_probation_date = fields.Date(string="Extended Probation Date", tracking=True)
+    extend_option = fields.Selection(
+        [('1w', 'Extend by 1 Week'), ('1m', 'Extend by 1 Month'), ('3m', 'Extend by 3 Months')
+         ], string="Extension Period", tracking=True)
+    parent_user_id = fields.Many2one(related='parent_id.user_id', string="Reporting Manager (User)", store=True)
+    def open_probation_wizard(self):
+        """ Open wizard to manage probation status """
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Manage Probation Status',
+            'res_model': 'hr.probation.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_employee_id': self.id,
+                'default_probation_status': self.probation_status,
+                'default_extended_probation_date': self.extended_probation_date,
+                'default_extend_option': self.extend_option,
+            }
+        }
 
-    @api.depends('create_date')
+    @api.depends('job_start_date')
     def _compute_probation_end_date(self):
         for rec in self:
-            if rec.create_date:
-                rec.probation_end_date = rec.create_date.date() + timedelta(days=90)
-
-    def action_complete_probation(self):
-        """Mark probation as completed"""
-        for rec in self:
-            rec.probation_status = 'completed'
-
-    def action_extend_probation(self, new_date):
-        """Extend probation with a new date"""
-        for rec in self:
-            rec.probation_status = 'extended'
-            rec.extended_probation_date = new_date
-
-    def check_probation_completion(self):
-        """Cron job to check probation completion"""
-        today = date.today()
-        employees = self.search([('probation_end_date', '=', today), ('probation_status', '=', 'pending')])
-
-        for emp in employees:
-            if emp.parent_id:  # Reporting manager exists
-                template = self.env.ref('your_module.email_template_probation_notification')
-                template.send_mail(emp.id, force_send=True)
+            if rec.job_start_date:  # Check if job_start_date is not empty
+                rec.probation_end_date = rec.job_start_date + timedelta(days=90)
+            else:
+                rec.probation_end_date = False  # Reset if job_start_date is empty
 
     @api.depends('biometric_id')
     def _compute_attendance(self):
@@ -203,7 +216,6 @@ class HrEmployee(models.Model):
         ('training', 'Training'),
         ('probation', 'Probation'),
         ('employment', 'Employment'),
-        ('pip', 'PIP'),
         ('notice_period', 'Notice Period'),
         ('relieved', 'Relieved'),
         ('rejoined', 'Rejoined'),
